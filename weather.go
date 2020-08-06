@@ -3,6 +3,7 @@ package main
 // Import all necessary packages
 import (
 	"fmt"
+	"strconv"
 	"weatherClasses"
 )
 
@@ -28,8 +29,10 @@ func main() {
 	weatherTest_1 := weatherTest{test: "Hello world !"}
 	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
 	temperature := weatherClasses.InitializeTemperature(23.899)
+	uv := weatherClasses.InitializeUV(3)
 
 	fmt.Printf("Weather test message: " + weatherTest_1.test + "\n")
 	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
 	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
+	fmt.Printf("UV index: " + strconv.Itoa(uv.GetIndex()) + ", UV risk: " + uv.GetRisk().String() + "\n")
 }
