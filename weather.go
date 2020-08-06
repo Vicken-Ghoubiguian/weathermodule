@@ -28,5 +28,5 @@ func main() {
 
 	fmt.Printf("Weather test message: " + weatherTest_1.test + "\n")
 	fmt.Printf("(" + fmt.Sprintf("%f", coords.Longitude) + ", " + fmt.Sprintf("%f", coords.Latitude) + ")\n")
-	fmt.Printf("Temperature (in " + temperature.CurrentTemperatureScale + "): " + fmt.Sprintf("%f", temperature.TemperatureValue) + temperature.TemperatureScaleSymbol + "\n")
+	fmt.Printf("Temperature (in " + temperature.CurrentTemperatureScale.String() + "): " + fmt.Sprintf("%f", temperature.TemperatureValue) + temperature.TemperatureScaleSymbol + "\n")
 }
