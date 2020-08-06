@@ -21,13 +21,31 @@ func (tempScale TemperatureScale) String() string {
 type Temperature struct {
 
 	//
-	TemperatureValue float64
-	CurrentTemperatureScale TemperatureScale
-	TemperatureScaleSymbol string
+	temperatureValue float64
+	currentTemperatureScale TemperatureScale
+	temperatureScaleSymbol string
 }
 
 //
 func InitializeTemperature(value float64) *Temperature {
 
-	return &Temperature{TemperatureValue: value, CurrentTemperatureScale: Kelvin, TemperatureScaleSymbol: " K"}
+	return &Temperature{temperatureValue: value, currentTemperatureScale: Kelvin, temperatureScaleSymbol: " K"}
+}
+
+//
+func (temp *Temperature) GetTemperatureValue() float64 {
+
+	return temp.temperatureValue
+}
+
+//
+func (temp *Temperature) GetCurrentTemperatureScale() TemperatureScale {
+
+	return temp.currentTemperatureScale
+}
+
+//
+func (temp *Temperature) GetTemperatureScaleSymbol() string {
+
+	return temp.temperatureScaleSymbol
 }

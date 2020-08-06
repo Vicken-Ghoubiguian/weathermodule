@@ -4,12 +4,24 @@ package weatherClasses
 type Coordinates struct {
 
 	//
-	Longitude float64
-	Latitude float64
+	longitude float64
+	latitude float64
 }
 
 // Defining the Coordinates initializer
 func InitializeCoordinates(wishedongitude float64, wishedLatitude float64) *Coordinates {
 
-	return &Coordinates{Longitude: wishedongitude, Latitude: wishedLatitude}
+	return &Coordinates{longitude: wishedongitude, latitude: wishedLatitude}
+}
+
+//
+func (coords *Coordinates) GetLongitude() float64 {
+
+	return coords.longitude
+}
+
+//
+func (coords *Coordinates) GetLatitude() float64 {
+
+	return coords.latitude
 }

@@ -30,6 +30,6 @@ func main() {
 	temperature := weatherClasses.InitializeTemperature(23.899)
 
 	fmt.Printf("Weather test message: " + weatherTest_1.test + "\n")
-	fmt.Printf("(" + fmt.Sprintf("%f", coords.Longitude) + ", " + fmt.Sprintf("%f", coords.Latitude) + ")\n")
-	fmt.Printf("Temperature (in " + temperature.CurrentTemperatureScale.String() + "): " + fmt.Sprintf("%f", temperature.TemperatureValue) + temperature.TemperatureScaleSymbol + "\n")
+	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
+	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
 }
