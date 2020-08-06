@@ -4,12 +4,16 @@ import "fmt"
 
 type Weather struct {
 
+}
+
+type weatherTest struct {
+
 	test string
 }
 
 func main() {
 
-	weatherTest := Weather{test: "Hello world !"}
+	weatherTest_1 := weatherTest{test: "Hello world !"}
 
-	fmt.Printf("Weather test message: " + weatherTest.test + "\n")
+	fmt.Printf("Weather test message: " + weatherTest_1.test + "\n")
 }
