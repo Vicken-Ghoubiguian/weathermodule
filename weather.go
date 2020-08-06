@@ -9,7 +9,7 @@ import (
 type Weather struct {
 
 	//
-	coords weatherClasses.Coordinates
+	Coords weatherClasses.Coordinates
 }
 
 type weatherTest struct {
