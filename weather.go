@@ -1,9 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"weatherClasses"
+)
 
+//
 type Weather struct {
 
+	//
+	coords weatherClasses.Coordinates
 }
 
 type weatherTest struct {
