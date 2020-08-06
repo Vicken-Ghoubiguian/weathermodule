@@ -1,11 +1,12 @@
 package main
 
+// Import all necessary packages
 import (
 	"fmt"
 	"weatherClasses"
 )
 
-//
+// Defining the type 'Weather' which recover and manage current weather in a defined city
 type Weather struct {
 
 	//
@@ -15,11 +16,13 @@ type Weather struct {
 	Temperature weatherClasses.Temperature
 }
 
+// Defining 'weatherTest' for a test struct
 type weatherTest struct {
 
 	test string
 }
 
+// main function to test all of the package
 func main() {
 
 	weatherTest_1 := weatherTest{test: "Hello world !"}
