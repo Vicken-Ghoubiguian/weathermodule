@@ -1,6 +1,11 @@
 package weatherClasses
 
 //
+import (
+	"fmt"
+)
+
+//
 type TemperatureScale int
 
 //
@@ -49,3 +54,58 @@ func (temp *Temperature) GetTemperatureScaleSymbol() string {
 
 	return temp.temperatureScaleSymbol
 }
+
+//
+func (temp *Temperature) SetTemperatureAsKelvin() {
+
+	if temp.currentTemperatureScale == Celsius {
+
+		temp.temperatureValue = temp.temperatureValue + 273.15
+		temp.currentTemperatureScale = Kelvin
+		temp.temperatureScaleSymbol = " K"
+
+		fmt.Printf("Temperature converted in Kelvin (K) successfully.\n")
+
+	} else if temp.currentTemperatureScale == Fahrenheit {
+
+		temp.temperatureValue = (temp.temperatureValue - 32) * (5/9) + 273.15
+		temp.currentTemperatureScale = Kelvin
+		temp.temperatureScaleSymbol = " K"
+
+		fmt.Printf("Temperature converted in Kelvin (K) successfully.\n")
+
+	} else {
+
+		fmt.Printf("Temperature already in Kelvin (K).\n")
+
+	}
+}
+
+//
+func (temp *Temperature) SetTemperatureAsCelsius() {
+
+	if temp.currentTemperatureScale == Kelvin {
+
+		temp.temperatureValue = temp.temperatureValue - 273.15
+		temp.currentTemperatureScale = Celsius
+		temp.temperatureScaleSymbol = " °C"
+
+		fmt.Printf("Temperature converted in Celsius (°C) successfully.\n")
+
+	} else if temp.currentTemperatureScale == Fahrenheit {
+
+		temp.temperatureValue = (temp.temperatureValue - 32) * (5/9)
+		temp.currentTemperatureScale = Celsius
+		temp.temperatureScaleSymbol = " °C"
+
+		fmt.Printf("Temperature converted in Celsius (°C) successfully.\n")
+
+	} else {
+
+		fmt.Printf("Temperature already in Celsius (°C).\n")
+
+	}
+}
+
+//
+
