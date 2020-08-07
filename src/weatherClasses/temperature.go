@@ -55,7 +55,7 @@ func (temp *Temperature) GetTemperatureScaleSymbol() string {
 	return temp.temperatureScaleSymbol
 }
 
-//
+// Temperature conversion to Kelvin (°K)
 func (temp *Temperature) SetTemperatureAsKelvin() {
 
 	if temp.currentTemperatureScale == Celsius {
@@ -81,7 +81,7 @@ func (temp *Temperature) SetTemperatureAsKelvin() {
 	}
 }
 
-//
+// Temperature conversion to Celsius (°C)
 func (temp *Temperature) SetTemperatureAsCelsius() {
 
 	if temp.currentTemperatureScale == Kelvin {
@@ -107,7 +107,7 @@ func (temp *Temperature) SetTemperatureAsCelsius() {
 	}
 }
 
-//
+// Temperature conversion to Fahrenheit (°F)
 func (temp *Temperature) SetTemperatureAsFahrenheit() {
 
 	if temp.currentTemperatureScale == Kelvin {
