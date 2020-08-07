@@ -120,7 +120,7 @@ func (temp *Temperature) SetTemperatureAsFahrenheit() {
 
 	if temp.currentTemperatureScale == Kelvin {
 
-		temp.temperatureValue = (temp.temperatureValue - 273.15) * 1.8 + 32
+		temp.temperatureValue = (temp.temperatureValue - 273.15) * (9.0/5.0) + 32
 		temp.currentTemperatureScale = Fahrenheit
                 temp.temperatureScaleSymbol = " °F"
 
@@ -128,7 +128,7 @@ func (temp *Temperature) SetTemperatureAsFahrenheit() {
 
 	} else if temp.currentTemperatureScale == Celsius {
 
-		temp.temperatureValue = (temp.temperatureValue * 1.8) + 32
+		temp.temperatureValue = (temp.temperatureValue * (9.0/5.0)) + 32
 		temp.currentTemperatureScale = Fahrenheit
                 temp.temperatureScaleSymbol = " °F"
 
