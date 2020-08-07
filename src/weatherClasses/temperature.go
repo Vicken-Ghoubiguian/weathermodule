@@ -68,7 +68,7 @@ func (temp *Temperature) SetTemperatureAsKelvin() {
 
 	} else if temp.currentTemperatureScale == Fahrenheit {
 
-		temp.temperatureValue = (temp.temperatureValue - 32) * (5/9) + 273.15
+		temp.temperatureValue = (temp.temperatureValue - 32) * (5.0/9.0) + 273.15
 		temp.currentTemperatureScale = Kelvin
 		temp.temperatureScaleSymbol = " K"
 
@@ -102,7 +102,7 @@ func (temp *Temperature) SetTemperatureAsCelsius() {
 
 	} else if temp.currentTemperatureScale == Fahrenheit {
 
-		temp.temperatureValue = (temp.temperatureValue - 32) * (5/9)
+		temp.temperatureValue = (temp.temperatureValue - 32) * (5.0/9.0)
 		temp.currentTemperatureScale = Celsius
 		temp.temperatureScaleSymbol = " °C"
 
@@ -120,7 +120,7 @@ func (temp *Temperature) SetTemperatureAsFahrenheit() {
 
 	if temp.currentTemperatureScale == Kelvin {
 
-		temp.temperatureValue = (temp.temperatureValue - 273.15) * (9/5) + 32
+		temp.temperatureValue = (temp.temperatureValue - 273.15) * 1.8 + 32
 		temp.currentTemperatureScale = Fahrenheit
                 temp.temperatureScaleSymbol = " °F"
 
@@ -128,7 +128,7 @@ func (temp *Temperature) SetTemperatureAsFahrenheit() {
 
 	} else if temp.currentTemperatureScale == Celsius {
 
-		temp.temperatureValue = (temp.temperatureValue * (9/5)) + 32
+		temp.temperatureValue = (temp.temperatureValue * 1.8) + 32
 		temp.currentTemperatureScale = Fahrenheit
                 temp.temperatureScaleSymbol = " °F"
 

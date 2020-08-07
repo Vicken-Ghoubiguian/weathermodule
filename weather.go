@@ -34,7 +34,7 @@ func main() {
 
 	weatherTest_1 := weatherTest{test: "Hello world !"}
 	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
-	temperature := weatherClasses.InitializeTemperature(296.85)
+	temperature := weatherClasses.InitializeTemperature(300.85)
 	uv := weatherClasses.InitializeUV(10)
 
 	fmt.Printf("Weather test message: " + weatherTest_1.test + "\n")
@@ -43,8 +43,8 @@ func main() {
 	temperature.SetTemperatureAsCelsius()
 	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
 
-	//temperature.SetTemperatureAsFahrenheit()
-	//fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
+	temperature.SetTemperatureAsFahrenheit()
+	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
 
 	temperature.SetTemperatureAsKelvin()
 	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
