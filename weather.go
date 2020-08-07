@@ -15,6 +15,9 @@ type Weather struct {
 
 	//
 	Temperature weatherClasses.Temperature
+	FeelingLikeTemperature weatherClasses.Temperature
+	MinTemperature weatherClasses.Temperature
+	MaxTemperature weatherClasses.Temperature
 
 	//
 	UltraViolet weatherClasses.UV
