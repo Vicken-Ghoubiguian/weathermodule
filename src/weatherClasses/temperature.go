@@ -108,4 +108,27 @@ func (temp *Temperature) SetTemperatureAsCelsius() {
 }
 
 //
+func (temp *Temperature) SetTemperatureAsFahrenheit() {
 
+	if temp.currentTemperatureScale == Kelvin {
+
+		temp.temperatureValue = (temp.temperatureValue - 273.15) * (9/5) + 32
+		temp.currentTemperatureScale = Fahrenheit
+                temp.temperatureScaleSymbol = " °F"
+
+		fmt.Printf("Temperature converted in Fahrenheit (°F) successfully.\n")
+
+	} else if temp.currentTemperatureScale == Celsius {
+
+		temp.temperatureValue = (temp.temperatureValue * (9/5)) + 32
+		temp.currentTemperatureScale = Fahrenheit
+                temp.temperatureScaleSymbol = " °F"
+
+		fmt.Printf("Temperature converted in Fahrenheit (°F) successfully.\n")
+
+	} else {
+
+		fmt.Printf("Temperature already in Fahrenheit (°F).\n")
+
+	}
+}
