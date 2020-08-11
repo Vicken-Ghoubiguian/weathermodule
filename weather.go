@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 	"weatherClasses"
+	"io/ioutil"
+	"net/http"
 )
 
 // Defining the type 'Weather' which recover and manage current weather in a defined city
@@ -24,8 +26,19 @@ type Weather struct {
 }
 
 // Defining the Weather initializer
-func InitializeWeather() {
+func InitializeWeather(city string, apiKey string) string {
 
+	//
+	weatherRequest := fmt.Sprintf("https://samples.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
+
+	//
+	resp, _ := http.Get(weatherRequest)
+
+	//
+	weatherJsonString, _ := ioutil.ReadAll(resp.Body)
+
+	//
+	return string(weatherJsonString,)
 }
 
 // main function to test all of the package
@@ -34,7 +47,9 @@ func main() {
 	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
 	temperature := weatherClasses.InitializeTemperature(300.85)
 	uv := weatherClasses.InitializeUV(10)
+	weatherResponse := InitializeWeather("Paris", "")
 
+	fmt.Printf("Weather response: " + weatherResponse + "\n\n")
 	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
 
 	temperature.SetTemperatureAsCelsius()
