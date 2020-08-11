@@ -29,6 +29,11 @@ type weatherTest struct {
 	test string
 }
 
+// Defining the Weather initializer
+func InitializeWeather() {
+
+}
+
 // main function to test all of the package
 func main() {
 
