@@ -23,12 +23,6 @@ type Weather struct {
 	UltraViolet weatherClasses.UV
 }
 
-// Defining 'weatherTest' for a test struct
-type weatherTest struct {
-
-	test string
-}
-
 // Defining the Weather initializer
 func InitializeWeather() {
 
@@ -37,12 +31,10 @@ func InitializeWeather() {
 // main function to test all of the package
 func main() {
 
-	weatherTest_1 := weatherTest{test: "Hello world !"}
 	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
 	temperature := weatherClasses.InitializeTemperature(300.85)
 	uv := weatherClasses.InitializeUV(10)
 
-	fmt.Printf("Weather test message: " + weatherTest_1.test + "\n")
 	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
 
 	temperature.SetTemperatureAsCelsius()
