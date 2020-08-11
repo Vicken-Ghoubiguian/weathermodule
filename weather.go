@@ -28,7 +28,7 @@ type Weather struct {
 // Defining the Weather initializer
 func InitializeWeather(city string, apiKey string) (string, string) {
 
-	//
+	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
 	uvRequest := fmt.Sprintf("http://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, "48.85", "2.3")
 
@@ -40,7 +40,6 @@ func InitializeWeather(city string, apiKey string) (string, string) {
 	weatherJsonString, _ := ioutil.ReadAll(weatherResp.Body)
 	uvJsonString, _ := ioutil.ReadAll(uvResp.Body)
 
-	//
 	return string(weatherJsonString), string(uvJsonString)
 }
 
@@ -50,7 +49,7 @@ func main() {
 	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
 	temperature := weatherClasses.InitializeTemperature(300.85)
 	uv := weatherClasses.InitializeUV(10)
-	weatherResponse, uvResponse := InitializeWeather("Paris,Fr", "5222a1c311ca31001b0877137d584c36")
+	weatherResponse, uvResponse := InitializeWeather("Paris,Fr", "")
 
 	fmt.Printf("Weather response: " + weatherResponse + "\n\n")
 	fmt.Printf("UV response: " + uvResponse + "\n\n")
