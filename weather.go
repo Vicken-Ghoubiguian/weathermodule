@@ -49,6 +49,8 @@ func main() {
 	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
 	temperature := weatherClasses.InitializeTemperature(300.85)
 	uv := weatherClasses.InitializeUV(10)
+	sunRise := weatherClasses.InitializeSunTime(1597221424)
+	sunSet := weatherClasses.InitializeSunTime(1597221424)
 	weatherResponse, uvResponse := InitializeWeather("Paris,Fr", "")
 
 	fmt.Printf("Weather response: " + weatherResponse + "\n\n")
@@ -66,4 +68,8 @@ func main() {
 	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
 
 	fmt.Printf("UV index: " + strconv.Itoa(uv.GetIndex()) + ", UV risk: " + uv.GetRisk().String() + "\n")
+
+	fmt.Printf("Sun Rise: " + sunRise.GetSunTimeInCurrentFormat() + "\n")
+
+	fmt.Printf("Sun Set: " + sunSet.GetSunTimeInCurrentFormat() + "\n")
 }

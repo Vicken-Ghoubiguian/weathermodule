@@ -1,0 +1,45 @@
+package weatherClasses
+
+//
+import (
+	"strconv"
+)
+
+//
+type sunTimeFormat int
+
+//
+const (
+
+	Timestamp = iota
+	DMYHMSFormat
+	YMDHMSFormat
+	MDYHMSFormat
+)
+
+//
+func (timeFormat sunTimeFormat) String() string {
+
+	return [...]string{"Timestamp", "DMYHMSFormat", "YMDHMSFormat", "MDYHMSFormat"}[timeFormat]
+}
+
+//
+type SunTime struct {
+
+	//
+	sunTimeInCurrentFormat string
+	currentFormat sunTimeFormat
+	asTimestamp int64
+}
+
+//
+func InitializeSunTime(value int64) *SunTime {
+
+	return &SunTime{sunTimeInCurrentFormat: strconv.FormatInt(value, 10), currentFormat: Timestamp, asTimestamp: value}
+}
+
+//
+func (currentSunTime *SunTime) GetSunTimeInCurrentFormat() string {
+
+	return currentSunTime.sunTimeInCurrentFormat
+}
