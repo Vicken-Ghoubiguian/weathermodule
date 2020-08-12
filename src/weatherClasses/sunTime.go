@@ -43,3 +43,15 @@ func (currentSunTime *SunTime) GetSunTimeInCurrentFormat() string {
 
 	return currentSunTime.sunTimeInCurrentFormat
 }
+
+//
+func (currentSunTime *SunTime) GetCurrentFormat() sunTimeFormat {
+
+	return currentSunTime.currentFormat
+}
+
+//
+func (currentSunTime *SunTime) GetSunTimeAsTimestamp() int64 {
+
+	return currentSunTime.asTimestamp
+}
