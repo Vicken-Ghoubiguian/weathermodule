@@ -22,6 +22,10 @@ type Weather struct {
 	MaxTemperature weatherClasses.Temperature
 
 	//
+	Sunrise weatherClasses.SunTime
+	Sunset weatherClasses.SunTime
+
+	//
 	UltraViolet weatherClasses.UV
 }
 
