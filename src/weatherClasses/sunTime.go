@@ -2,6 +2,7 @@ package weatherClasses
 
 //
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -54,4 +55,18 @@ func (currentSunTime *SunTime) GetCurrentFormat() sunTimeFormat {
 func (currentSunTime *SunTime) GetSunTimeAsTimestamp() int64 {
 
 	return currentSunTime.asTimestamp
+}
+
+//
+func (currentSunTime *SunTime) SetCurrentFormatAsTimestamp() {
+
+	if currentSunTime.currentFormat != Timestamp {
+
+		currentSunTime.sunTimeInCurrentFormat = strconv.FormatInt(currentSunTime.asTimestamp, 10)
+		currentSunTime.currentFormat = Timestamp
+
+	} else {
+
+		fmt.Printf("Suntime already in Timestamp.\n")
+	}
 }

@@ -73,7 +73,9 @@ func main() {
 
 	fmt.Printf("UV index: " + strconv.Itoa(uv.GetIndex()) + ", UV risk: " + uv.GetRisk().String() + "\n")
 
-	fmt.Printf("Sunrise (as " + sunRise.GetCurrentFormat().String() + "): " + sunRise.GetSunTimeInCurrentFormat() + "\n")
+	sunRise.SetCurrentFormatAsTimestamp()
+	sunSet.SetCurrentFormatAsTimestamp()
 
+	fmt.Printf("Sunrise (as " + sunRise.GetCurrentFormat().String() + "): " + sunRise.GetSunTimeInCurrentFormat() + "\n")
 	fmt.Printf("Sunset (as " + sunSet.GetCurrentFormat().String() + "): " + sunSet.GetSunTimeInCurrentFormat() + "\n")
 }
