@@ -19,6 +19,9 @@ type WeatherModule struct {
 	Coords weatherClasses.Coordinates
 
 	//
+	Weather weatherClasses.Weather
+
+	//
 	Temperature weatherClasses.Temperature
 	FeelingLikeTemperature weatherClasses.Temperature
 	MinTemperature weatherClasses.Temperature
