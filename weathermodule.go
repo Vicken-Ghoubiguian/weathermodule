@@ -61,10 +61,13 @@ func main() {
 	uv := weatherClasses.InitializeUV(10)
 	sunRise := weatherClasses.InitializeSunTime(1597221424)
 	sunSet := weatherClasses.InitializeSunTime(1597221424)
+	weather := weatherClasses.InitializeWeather(300, "Drizzle", "light intensity drizzle", "09d")
 	weatherResponse, uvResponse := InitializeWeatherModule("Paris,Fr", "")
 
 	fmt.Printf("Weather response: " + weatherResponse + "\n\n")
 	fmt.Printf("UV response: " + uvResponse + "\n\n")
+
+	fmt.Printf("Weather (" + weather.GetMain() + ", " + weather.GetDescription() + ", " + weather.GetIconUrl() + ")\n")
 
 	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
 
