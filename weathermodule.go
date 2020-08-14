@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+// Importation of the github project gjson to treat received json
 import "github.com/tidwall/gjson"
 
 // Defining the type 'Weather' which recover and manage current weather in a defined city
