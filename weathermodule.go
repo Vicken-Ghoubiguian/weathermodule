@@ -13,7 +13,7 @@ import (
 import "github.com/tidwall/gjson"
 
 // Defining the type 'Weather' which recover and manage current weather in a defined city
-type Weather struct {
+type WeatherModule struct {
 
 	//
 	Coords weatherClasses.Coordinates
@@ -33,7 +33,7 @@ type Weather struct {
 }
 
 // Defining the Weather initializer
-func InitializeWeather(city string, apiKey string) (string, string) {
+func InitializeWeatherModule(city string, apiKey string) (string, string) {
 
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
@@ -58,7 +58,7 @@ func main() {
 	uv := weatherClasses.InitializeUV(10)
 	sunRise := weatherClasses.InitializeSunTime(1597221424)
 	sunSet := weatherClasses.InitializeSunTime(1597221424)
-	weatherResponse, uvResponse := InitializeWeather("Paris,Fr", "")
+	weatherResponse, uvResponse := InitializeWeatherModule("Paris,Fr", "")
 
 	fmt.Printf("Weather response: " + weatherResponse + "\n\n")
 	fmt.Printf("UV response: " + uvResponse + "\n\n")
