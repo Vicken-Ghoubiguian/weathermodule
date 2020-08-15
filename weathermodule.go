@@ -19,7 +19,7 @@ var cyan string = "\033[36m"
 var reset string = "\033[0m"
 
 // Function which display HTTP request error's code and message when the first occurs
-func owmErrorHandler(codeError string, errorMessage string) {
+func owmErrorHandlerFunction(codeError string, errorMessage string) {
 
 	fmt.Println(red + "Occured error (" + codeError + "): " + errorMessage + reset)
 
