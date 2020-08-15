@@ -108,7 +108,7 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 	} else {
 
 		// Displaying success message...
-		fmt.Println(green + "Weather implemented successfully !" + reset)
+		fmt.Println(green + "Weather implemented successfully !" + reset + "\n")
 	}
 
 	return string(weatherJsonString), string(uvJsonString)
