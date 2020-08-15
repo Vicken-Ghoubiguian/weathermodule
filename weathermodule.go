@@ -11,7 +11,7 @@ import (
 )
 
 // Importation of the github project gjson to treat received json
-//import "github.com/tidwall/gjson"
+import "github.com/tidwall/gjson"
 
 var red string = "\033[31m"
 var green string = "\033[32m"
@@ -93,7 +93,25 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 	//
 	otherErrorHandlerFunction(err3)
 
-	return string(weatherJsonString), string(uvJsonString)
+	//
+	owmCode := gjson.Get(weatherRequest, "cod")
+
+	//
+	if owmCode.Int() != 200 {
+
+		//
+		owmMessage := gjson.Get(weatherRequest, "message")
+
+		//
+		owmErrorHandlerFunction(owmCode.String(), owmMessage.String())
+
+		return "", ""
+
+	} else {
+
+		return string(weatherJsonString), string(uvJsonString)
+
+	}
 }
 
 // main function to test all of the package
