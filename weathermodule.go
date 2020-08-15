@@ -13,12 +13,27 @@ import (
 // Importation of the github project gjson to treat received json
 //import "github.com/tidwall/gjson"
 
+var red string = "\033[31m"
+var green string = "\033[32m"
+var cyan string = "\033[36m"
+var reset string = "\033[0m"
+
+// Function which display HTTP request error's code and message when the first occurs
+func owmErrorHandler(codeError string, errorMessage string) {
+
+	fmt.Println(red + "Occured error (" + codeError + "): " + errorMessage + reset)
+
+	fmt.Println("\n")
+
+	os.Exit(1)
+}
+
 // Function which display other errors when they occurs
 func otherErrorHandlerFunction(err error) {
 
 	if err != nil {
 
-		fmt.Println(err.Error())
+		fmt.Println(red + err.Error() + reset)
 
 		os.Exit(1)
 	}
