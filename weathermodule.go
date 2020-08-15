@@ -94,24 +94,23 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 	otherErrorHandlerFunction(err3)
 
 	//
-	owmCode := gjson.Get(weatherRequest, "cod")
+	owmCode := gjson.Get(string(weatherJsonString), "cod")
 
 	//
 	if owmCode.Int() != 200 {
 
 		//
-		owmMessage := gjson.Get(weatherRequest, "message")
+		owmMessage := gjson.Get(string(weatherJsonString), "message")
 
 		//
 		owmErrorHandlerFunction(owmCode.String(), owmMessage.String())
 
-		return "", ""
-
 	} else {
 
-		return string(weatherJsonString), string(uvJsonString)
-
+		
 	}
+
+	return string(weatherJsonString), string(uvJsonString)
 }
 
 // main function to test all of the package
