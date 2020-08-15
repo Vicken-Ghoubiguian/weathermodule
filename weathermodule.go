@@ -3,6 +3,7 @@ package main
 // Import all necessary packages
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"weatherClasses"
 	"io/ioutil"
@@ -11,6 +12,17 @@ import (
 
 // Importation of the github project gjson to treat received json
 //import "github.com/tidwall/gjson"
+
+// Function which display other errors when they occurs
+func otherErrorHandlerFunction(err error) {
+
+	if err != nil {
+
+		fmt.Println(err.Error())
+
+		os.Exit(1)
+	}
+}
 
 // Defining the type 'Weather' which recover and manage current weather in a defined city
 type WeatherModule struct {
@@ -43,12 +55,28 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 	uvRequest := fmt.Sprintf("http://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, "48.85", "2.3")
 
 	//
-	weatherResp, _ := http.Get(weatherRequest)
-	uvResp, _ := http.Get(uvRequest)
+	weatherResp, err0 := http.Get(weatherRequest)
 
 	//
-	weatherJsonString, _ := ioutil.ReadAll(weatherResp.Body)
-	uvJsonString, _ := ioutil.ReadAll(uvResp.Body)
+	otherErrorHandlerFunction(err0)
+
+	//
+	uvResp, err1 := http.Get(uvRequest)
+
+	//
+	otherErrorHandlerFunction(err1)
+
+	//
+	weatherJsonString, err2 := ioutil.ReadAll(weatherResp.Body)
+
+	//
+	otherErrorHandlerFunction(err2)
+
+	//
+	uvJsonString, err3 := ioutil.ReadAll(uvResp.Body)
+
+	//
+	otherErrorHandlerFunction(err3)
 
 	return string(weatherJsonString), string(uvJsonString)
 }
