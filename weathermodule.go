@@ -102,12 +102,13 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 		//
 		owmMessage := gjson.Get(string(weatherJsonString), "message")
 
-		//
+		// Calling the 'owmErrorHandlerFunction' to treat the current error...
 		owmErrorHandlerFunction(owmCode.String(), owmMessage.String())
 
 	} else {
 
-		
+		// Displaying success message...
+		fmt.Println(green + "Weather implemented successfully !" + reset)
 	}
 
 	return string(weatherJsonString), string(uvJsonString)
