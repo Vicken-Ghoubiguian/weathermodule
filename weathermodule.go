@@ -103,50 +103,24 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 
 	} else {*/
 
-		/*******************************************************************
-
-                ********************************************************************/
-
-		//
-		longitude := gjson.Get(string(weatherJsonString), "coord.lon")
-		latitude := gjson.Get(string(weatherJsonString), "coord.lat")
-
 		//
 		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
-		id := gjson.Get(weather, "id")
-		main := gjson.Get(weather, "main")
-		description := gjson.Get(weather, "description")
-		icon := gjson.Get(weather, "icon")
 
 		//
-		temperature := gjson.Get(string(weatherJsonString), "main.temp")
-		feelingTemperature := gjson.Get(string(weatherJsonString), "main.feels_like")
-		minimumTemperature := gjson.Get(string(weatherJsonString), "main.temp_min")
-		maximumTemperature := gjson.Get(string(weatherJsonString), "main.temp_max")
+		currentCoordinates := weatherClasses.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
 
 		//
-		sunrise := gjson.Get(string(weatherJsonString), "sys.sunrise")
-		sunset := gjson.Get(string(weatherJsonString), "sys.sunset")
-
-		/*******************************************************************
-
-		********************************************************************/
+		currentWeather := weatherClasses.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
 
 		//
-		currentCoordinates := weatherClasses.InitializeCoordinates(longitude.Float(), latitude.Float())
+		currentTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
+		currentFeelingTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
+		currentMinimumTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
+		currentMaximumTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
 
 		//
-		currentWeather := weatherClasses.InitializeWeather(id.Int(), main.String(), description.String(), icon.String())
-
-		//
-		currentTemperature := weatherClasses.InitializeTemperature(temperature.Float())
-		currentFeelingTemperature := weatherClasses.InitializeTemperature(feelingTemperature.Float())
-		currentMinimumTemperature := weatherClasses.InitializeTemperature(minimumTemperature.Float())
-		currentMaximumTemperature := weatherClasses.InitializeTemperature(maximumTemperature.Float())
-
-		//
-		currentSunrise := weatherClasses.InitializeSunTime(sunrise.Int())
-		currentSunset := weatherClasses.InitializeSunTime(sunset.Int())
+		currentSunrise := weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
+		currentSunset := weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
 		//
 		currentUV := weatherClasses.InitializeUV(10)
@@ -156,8 +130,6 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 
 		return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
 	//}
-
-	//return string(weatherJsonString), string(uvJsonString)
 }
 
 // main function to test all of the package
