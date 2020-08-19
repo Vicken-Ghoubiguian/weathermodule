@@ -163,34 +163,26 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 // main function to test all of the package
 func main() {
 
-	coords := weatherClasses.InitializeCoordinates(3.45, 7.89)
-	temperature := weatherClasses.InitializeTemperature(300.85)
-	uv := weatherClasses.InitializeUV(10)
-	sunRise := weatherClasses.InitializeSunTime(1597221424)
-	sunSet := weatherClasses.InitializeSunTime(1597221424)
-	weatherObj := InitializeWeatherModule("Paris,Fr", "")
-
-	/*fmt.Printf("Weather response: " + weatherResponse + "\n\n")
-	fmt.Printf("UV response: " + uvResponse + "\n\n")*/
+	weatherObj := InitializeWeatherModule("Paris,Fr", "5222a1c311ca31001b0877137d584c36")
 
 	fmt.Printf("Weather (" + weatherObj.Weather.GetMain() + ", " + weatherObj.Weather.GetDescription() + ", " + weatherObj.Weather.GetIconUrl() + ")\n")
 
-	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
+	fmt.Printf("(" + fmt.Sprintf("%f", weatherObj.Coords.GetLongitude()) + ", " + fmt.Sprintf("%f", weatherObj.Coords.GetLatitude()) + ")\n")
 
-	temperature.SetTemperatureAsCelsius()
-	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
+	weatherObj.Temperature.SetTemperatureAsCelsius()
+	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
-	temperature.SetTemperatureAsFahrenheit()
-	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
+	weatherObj.Temperature.SetTemperatureAsFahrenheit()
+	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
-	temperature.SetTemperatureAsKelvin()
-	fmt.Printf("Temperature (in " + temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", temperature.GetTemperatureValue()) + temperature.GetTemperatureScaleSymbol() + "\n")
+	weatherObj.Temperature.SetTemperatureAsKelvin()
+	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
-	fmt.Printf("UV index: " + strconv.Itoa(uv.GetIndex()) + ", UV risk: " + uv.GetRisk().String() + "\n")
+	fmt.Printf("UV index: " + strconv.Itoa(weatherObj.UltraViolet.GetIndex()) + ", UV risk: " + weatherObj.UltraViolet.GetRisk().String() + "\n")
 
-	sunRise.SetCurrentFormatAsTimestamp()
-	sunSet.SetCurrentFormatAsTimestamp()
+	weatherObj.Sunrise.SetCurrentFormatAsTimestamp()
+	weatherObj.Sunset.SetCurrentFormatAsTimestamp()
 
-	fmt.Printf("Sunrise (as " + sunRise.GetCurrentFormat().String() + "): " + sunRise.GetSunTimeInCurrentFormat() + "\n")
-	fmt.Printf("Sunset (as " + sunSet.GetCurrentFormat().String() + "): " + sunSet.GetSunTimeInCurrentFormat() + "\n")
+	fmt.Printf("Sunrise (as " + weatherObj.Sunrise.GetCurrentFormat().String() + "): " + weatherObj.Sunrise.GetSunTimeInCurrentFormat() + "\n")
+	fmt.Printf("Sunset (as " + weatherObj.Sunset.GetCurrentFormat().String() + "): " + weatherObj.Sunset.GetSunTimeInCurrentFormat() + "\n")
 }
