@@ -14,11 +14,6 @@ import (
 // Importation of the github project gjson to treat received json
 import "github.com/tidwall/gjson"
 
-var red string = "\033[31m"
-var green string = "\033[32m"
-var cyan string = "\033[36m"
-var reset string = "\033[0m"
-
 // Function which extracts weather datas from JSON response
 func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string {
 
@@ -30,7 +25,7 @@ func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string
 // Function which display HTTP request error's code and message when the first occurs
 func owmErrorHandlerFunction(codeError string, errorMessage string) {
 
-	fmt.Println(red + "Occured error (" + codeError + "): " + errorMessage + reset)
+	fmt.Println(weatherClasses.Red + "Occured error (" + codeError + "): " + errorMessage + weatherClasses.Reset)
 
 	fmt.Println("\n")
 
@@ -42,7 +37,7 @@ func otherErrorHandlerFunction(err error) {
 
 	if err != nil {
 
-		fmt.Println(red + err.Error() + reset)
+		fmt.Println(weatherClasses.Red + err.Error() + weatherClasses.Reset)
 
 		os.Exit(1)
 	}
@@ -137,7 +132,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 		currentUV = weatherClasses.InitializeUV(10)
 
 		// Displaying success message...
-		fmt.Println(green + "Weather implemented successfully !" + reset + "\n")
+		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
 	}
 
 	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
@@ -146,7 +141,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 // main function to test all of the package
 func main() {
 
-	weatherObj := InitializeWeatherModule("Paris,Fr", "")
+	weatherObj := InitializeWeatherModule("Paris,Fr", "5222a1c311ca31001b0877137d584c36")
 
 	fmt.Printf("Weather (" + weatherObj.Weather.GetMain() + ", " + weatherObj.Weather.GetDescription() + ", " + weatherObj.Weather.GetIconUrl() + ")\n")
 
