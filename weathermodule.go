@@ -74,6 +74,17 @@ type WeatherModule struct {
 // Defining the Weather initializer
 func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 
+	//
+	var currentCoordinates *weatherClasses.Coordinates
+	var currentWeather *weatherClasses.Weather
+	var currentTemperature *weatherClasses.Temperature
+	var currentFeelingTemperature *weatherClasses.Temperature
+	var currentMinimumTemperature *weatherClasses.Temperature
+	var currentMaximumTemperature *weatherClasses.Temperature
+	var currentSunrise *weatherClasses.SunTime
+	var currentSunset *weatherClasses.SunTime
+	var currentUV *weatherClasses.UV
+
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
 
@@ -90,7 +101,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 	otherErrorHandlerFunction(err2)
 
 	//
-	/*owmCode := gjson.Get(string(weatherJsonString), "cod")
+	owmCode := gjson.Get(string(weatherJsonString), "cod")
 
 	//
 	if owmCode.Int() != 200 {
@@ -101,41 +112,41 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 		// Calling the 'owmErrorHandlerFunction' to treat the current error...
 		owmErrorHandlerFunction(owmCode.String(), owmMessage.String())
 
-	} else {*/
+	} else {
 
 		//
 		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
 
 		//
-		currentCoordinates := weatherClasses.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
+		currentCoordinates = weatherClasses.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
 
 		//
-		currentWeather := weatherClasses.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
+		currentWeather = weatherClasses.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
 
 		//
-		currentTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
-		currentFeelingTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
-		currentMinimumTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
-		currentMaximumTemperature := weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
+		currentTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
+		currentFeelingTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
+		currentMinimumTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
+		currentMaximumTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
 
 		//
-		currentSunrise := weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
-		currentSunset := weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
+		currentSunrise = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
+		currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
 		//
-		currentUV := weatherClasses.InitializeUV(10)
+		currentUV = weatherClasses.InitializeUV(10)
 
 		// Displaying success message...
 		fmt.Println(green + "Weather implemented successfully !" + reset + "\n")
+	}
 
-		return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
-	//}
+	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
 }
 
 // main function to test all of the package
 func main() {
 
-	weatherObj := InitializeWeatherModule("Paris,Fr", "5222a1c311ca31001b0877137d584c36")
+	weatherObj := InitializeWeatherModule("Paris,Fr", "")
 
 	fmt.Printf("Weather (" + weatherObj.Weather.GetMain() + ", " + weatherObj.Weather.GetDescription() + ", " + weatherObj.Weather.GetIconUrl() + ")\n")
 
