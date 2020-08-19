@@ -3,20 +3,20 @@ package weatherClasses
 //
 type Weather struct {
 
-	id int
+	id int64
 	main string
 	description string
 	iconUrl string
 }
 
 //
-func InitializeWeather(idValue int, mainValue string, descriptionValue string, icon string) *Weather {
+func InitializeWeather(idValue int64, mainValue string, descriptionValue string, icon string) *Weather {
 
 	return &Weather{id: idValue, main: mainValue, description: descriptionValue, iconUrl: "https://openweathermap.org/img/wn/" + icon + ".png"}
 }
 
 //
-func (currentWeather *Weather) GetId() int {
+func (currentWeather *Weather) GetId() int64 {
 
 	return currentWeather.id
 }

@@ -8,6 +8,7 @@ import (
 	"weatherClasses"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 // Importation of the github project gjson to treat received json
@@ -17,6 +18,14 @@ var red string = "\033[31m"
 var green string = "\033[32m"
 var cyan string = "\033[36m"
 var reset string = "\033[0m"
+
+// Function which extracts weather datas from JSON response
+func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string {
+
+	brutWeatherWithoutHooks := strings.Trim(weatherFromHTTPResponseString, "[]")
+
+	return brutWeatherWithoutHooks
+}
 
 // Function which display HTTP request error's code and message when the first occurs
 func owmErrorHandlerFunction(codeError string, errorMessage string) {
@@ -43,31 +52,30 @@ func otherErrorHandlerFunction(err error) {
 type WeatherModule struct {
 
 	//
-	Coords weatherClasses.Coordinates
+	Coords *weatherClasses.Coordinates
 
 	//
-	Weather weatherClasses.Weather
+	Weather *weatherClasses.Weather
 
 	//
-	Temperature weatherClasses.Temperature
-	FeelingLikeTemperature weatherClasses.Temperature
-	MinTemperature weatherClasses.Temperature
-	MaxTemperature weatherClasses.Temperature
+	Temperature *weatherClasses.Temperature
+	FeelingLikeTemperature *weatherClasses.Temperature
+	MinTemperature *weatherClasses.Temperature
+	MaxTemperature *weatherClasses.Temperature
 
 	//
-	Sunrise weatherClasses.SunTime
-	Sunset weatherClasses.SunTime
+	Sunrise *weatherClasses.SunTime
+	Sunset *weatherClasses.SunTime
 
 	//
-	UltraViolet weatherClasses.UV
+	UltraViolet *weatherClasses.UV
 }
 
 // Defining the Weather initializer
-func InitializeWeatherModule(city string, apiKey string) (string, string) {
+func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
-	uvRequest := fmt.Sprintf("http://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, "48.85", "2.3")
 
 	//
 	weatherResp, err0 := http.Get(weatherRequest)
@@ -76,25 +84,13 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 	otherErrorHandlerFunction(err0)
 
 	//
-	uvResp, err1 := http.Get(uvRequest)
-
-	//
-	otherErrorHandlerFunction(err1)
-
-	//
 	weatherJsonString, err2 := ioutil.ReadAll(weatherResp.Body)
 
 	//
 	otherErrorHandlerFunction(err2)
 
 	//
-	uvJsonString, err3 := ioutil.ReadAll(uvResp.Body)
-
-	//
-	otherErrorHandlerFunction(err3)
-
-	//
-	owmCode := gjson.Get(string(weatherJsonString), "cod")
+	/*owmCode := gjson.Get(string(weatherJsonString), "cod")
 
 	//
 	if owmCode.Int() != 200 {
@@ -105,13 +101,63 @@ func InitializeWeatherModule(city string, apiKey string) (string, string) {
 		// Calling the 'owmErrorHandlerFunction' to treat the current error...
 		owmErrorHandlerFunction(owmCode.String(), owmMessage.String())
 
-	} else {
+	} else {*/
+
+		/*******************************************************************
+
+                ********************************************************************/
+
+		//
+		longitude := gjson.Get(string(weatherJsonString), "coord.lon")
+		latitude := gjson.Get(string(weatherJsonString), "coord.lat")
+
+		//
+		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		id := gjson.Get(weather, "id")
+		main := gjson.Get(weather, "main")
+		description := gjson.Get(weather, "description")
+		icon := gjson.Get(weather, "icon")
+
+		//
+		temperature := gjson.Get(string(weatherJsonString), "main.temp")
+		feelingTemperature := gjson.Get(string(weatherJsonString), "main.feels_like")
+		minimumTemperature := gjson.Get(string(weatherJsonString), "main.temp_min")
+		maximumTemperature := gjson.Get(string(weatherJsonString), "main.temp_max")
+
+		//
+		sunrise := gjson.Get(string(weatherJsonString), "sys.sunrise")
+		sunset := gjson.Get(string(weatherJsonString), "sys.sunset")
+
+		/*******************************************************************
+
+		********************************************************************/
+
+		//
+		currentCoordinates := weatherClasses.InitializeCoordinates(longitude.Float(), latitude.Float())
+
+		//
+		currentWeather := weatherClasses.InitializeWeather(id.Int(), main.String(), description.String(), icon.String())
+
+		//
+		currentTemperature := weatherClasses.InitializeTemperature(temperature.Float())
+		currentFeelingTemperature := weatherClasses.InitializeTemperature(feelingTemperature.Float())
+		currentMinimumTemperature := weatherClasses.InitializeTemperature(minimumTemperature.Float())
+		currentMaximumTemperature := weatherClasses.InitializeTemperature(maximumTemperature.Float())
+
+		//
+		currentSunrise := weatherClasses.InitializeSunTime(sunrise.Int())
+		currentSunset := weatherClasses.InitializeSunTime(sunset.Int())
+
+		//
+		currentUV := weatherClasses.InitializeUV(10)
 
 		// Displaying success message...
 		fmt.Println(green + "Weather implemented successfully !" + reset + "\n")
-	}
 
-	return string(weatherJsonString), string(uvJsonString)
+		return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
+	//}
+
+	//return string(weatherJsonString), string(uvJsonString)
 }
 
 // main function to test all of the package
@@ -122,13 +168,12 @@ func main() {
 	uv := weatherClasses.InitializeUV(10)
 	sunRise := weatherClasses.InitializeSunTime(1597221424)
 	sunSet := weatherClasses.InitializeSunTime(1597221424)
-	weather := weatherClasses.InitializeWeather(300, "Drizzle", "light intensity drizzle", "09d")
-	weatherResponse, uvResponse := InitializeWeatherModule("Paris,Fr", "")
+	weatherObj := InitializeWeatherModule("Paris,Fr", "")
 
-	fmt.Printf("Weather response: " + weatherResponse + "\n\n")
-	fmt.Printf("UV response: " + uvResponse + "\n\n")
+	/*fmt.Printf("Weather response: " + weatherResponse + "\n\n")
+	fmt.Printf("UV response: " + uvResponse + "\n\n")*/
 
-	fmt.Printf("Weather (" + weather.GetMain() + ", " + weather.GetDescription() + ", " + weather.GetIconUrl() + ")\n")
+	fmt.Printf("Weather (" + weatherObj.Weather.GetMain() + ", " + weatherObj.Weather.GetDescription() + ", " + weatherObj.Weather.GetIconUrl() + ")\n")
 
 	fmt.Printf("(" + fmt.Sprintf("%f", coords.GetLongitude()) + ", " + fmt.Sprintf("%f", coords.GetLatitude()) + ")\n")
 
