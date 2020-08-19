@@ -74,7 +74,7 @@ type WeatherModule struct {
 // Defining the Weather initializer
 func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 
-	//
+	// Defining all of the intermediates variables
 	var currentCoordinates *weatherClasses.Coordinates
 	var currentWeather *weatherClasses.Weather
 	var currentTemperature *weatherClasses.Temperature
