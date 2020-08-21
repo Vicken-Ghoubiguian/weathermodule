@@ -69,7 +69,7 @@ type WeatherModule struct {
 }
 
 // Defining the Weather initializer
-func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
+func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey string) *WeatherModule {
 
 	// Defining all of the intermediates variables
 	var currentCoordinates *weatherClasses.Coordinates
@@ -84,7 +84,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 	var currentUV *weatherClasses.UV
 
 	// Defining the HTTP request's URL for weather and uv
-	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
+	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city + "," + countrysISOAlpha2Code, apiKey)
 
 	//
 	weatherResp, err := http.Get(weatherRequest)
@@ -162,7 +162,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 // main function to test all of the package
 func main() {
 
-	weatherObj := InitializeWeatherModule("Paris,Fr", "5222a1c311ca31001b0877137d584c36")
+	weatherObj := InitializeWeatherModule("Paris", "fr", "5222a1c311ca31001b0877137d584c36")
 
 	fmt.Printf("Weather (" + weatherObj.Weather.GetMain() + ", " + weatherObj.Weather.GetDescription() + ", " + weatherObj.Weather.GetIconUrl() + ")\n")
 
