@@ -23,12 +23,12 @@ func (risk UVRisk) String() string {
 type UV struct {
 
 	//
-	index int
+	index int64
 	risk UVRisk
 }
 
 //
-func InitializeUV(value int) *UV {
+func InitializeUV(value int64) *UV {
 
 	var determiedUVRisk UVRisk
 
@@ -58,7 +58,7 @@ func InitializeUV(value int) *UV {
 }
 
 //
-func (currentUV *UV) GetIndex() int {
+func (currentUV *UV) GetIndex() int64 {
 
 	return currentUV.index
 }

@@ -4,7 +4,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
+	//"strconv"
 	"weatherClasses"
 	"io/ioutil"
 	"net/http"
@@ -110,6 +110,21 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 	} else {
 
 		//
+		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, gjson.Get(string(weatherJsonString), "coord.lat").String(), gjson.Get(string(weatherJsonString), "coord.lon").String())
+
+		//
+		uvResp, err3 := http.Get(uvRequest)
+
+		//
+		otherErrorHandlerFunction(err3)
+
+		//
+		uvJsonString, err4 := ioutil.ReadAll(uvResp.Body)
+
+		//
+		otherErrorHandlerFunction(err4)
+
+		//
 		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
 
 		//
@@ -129,7 +144,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 		currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
 		//
-		currentUV = weatherClasses.InitializeUV(10)
+		currentUV = weatherClasses.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
 
 		// Displaying success message...
 		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
@@ -156,7 +171,7 @@ func main() {
 	weatherObj.Temperature.SetTemperatureAsKelvin()
 	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
-	fmt.Printf("UV index: " + strconv.Itoa(weatherObj.UltraViolet.GetIndex()) + ", UV risk: " + weatherObj.UltraViolet.GetRisk().String() + "\n")
+	fmt.Printf("UV index: " + fmt.Sprintf("%d", weatherObj.UltraViolet.GetIndex()) + ", UV risk: " + weatherObj.UltraViolet.GetRisk().String() + "\n")
 
 	weatherObj.Sunrise.SetCurrentFormatAsTimestamp()
 	weatherObj.Sunset.SetCurrentFormatAsTimestamp()
