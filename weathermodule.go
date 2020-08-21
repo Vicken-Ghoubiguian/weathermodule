@@ -4,7 +4,6 @@ package main
 import (
 	"fmt"
 	"os"
-	//"strconv"
 	"weatherClasses"
 	"io/ioutil"
 	"net/http"
@@ -84,16 +83,16 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
 
 	//
-	weatherResp, err0 := http.Get(weatherRequest)
+	weatherResp, err := http.Get(weatherRequest)
 
 	//
-	otherErrorHandlerFunction(err0)
+	otherErrorHandlerFunction(err)
 
 	//
-	weatherJsonString, err2 := ioutil.ReadAll(weatherResp.Body)
+	weatherJsonString, err := ioutil.ReadAll(weatherResp.Body)
 
 	//
-	otherErrorHandlerFunction(err2)
+	otherErrorHandlerFunction(err)
 
 	//
 	owmCode := gjson.Get(string(weatherJsonString), "cod")
@@ -113,16 +112,16 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, gjson.Get(string(weatherJsonString), "coord.lat").String(), gjson.Get(string(weatherJsonString), "coord.lon").String())
 
 		//
-		uvResp, err3 := http.Get(uvRequest)
+		uvResp, err := http.Get(uvRequest)
 
 		//
-		otherErrorHandlerFunction(err3)
+		otherErrorHandlerFunction(err)
 
 		//
-		uvJsonString, err4 := ioutil.ReadAll(uvResp.Body)
+		uvJsonString, err := ioutil.ReadAll(uvResp.Body)
 
 		//
-		otherErrorHandlerFunction(err4)
+		otherErrorHandlerFunction(err)
 
 		//
 		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
