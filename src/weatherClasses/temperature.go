@@ -86,15 +86,11 @@ func (temp *Temperature) SetTemperatureAsCelsius() {
 
 	if temp.currentTemperatureScale == Kelvin {
 
-		fmt.Printf("\n")
-
 		temp.temperatureValue = temp.temperatureValue - 273.15
 		temp.currentTemperatureScale = Celsius
 		temp.temperatureScaleSymbol = " °C"
 
 		fmt.Printf(Green + "Temperature converted in Celsius (°C) successfully." + Reset + "\n")
-
-		fmt.Printf("\n")
 
 	} else if temp.currentTemperatureScale == Fahrenheit {
 
