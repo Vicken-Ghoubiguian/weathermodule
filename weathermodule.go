@@ -58,6 +58,9 @@ type WeatherModule struct {
 	MaxTemperature *weatherClasses.Temperature
 
 	//
+	Wind *weatherClasses.Wind
+
+	//
 	Sunrise *weatherClasses.SunTime
 	Sunset *weatherClasses.SunTime
 
@@ -75,6 +78,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 	var currentFeelingTemperature *weatherClasses.Temperature
 	var currentMinimumTemperature *weatherClasses.Temperature
 	var currentMaximumTemperature *weatherClasses.Temperature
+	var currentWind *weatherClasses.Wind
 	var currentSunrise *weatherClasses.SunTime
 	var currentSunset *weatherClasses.SunTime
 	var currentUV *weatherClasses.UV
@@ -139,6 +143,9 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 		currentMaximumTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
 
 		//
+		currentWind = weatherClasses.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
+
+		//
 		currentSunrise = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
 		currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
@@ -149,7 +156,7 @@ func InitializeWeatherModule(city string, apiKey string) *WeatherModule {
 		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
 	}
 
-	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
+	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Wind: currentWind, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
 }
 
 // main function to test all of the package
@@ -171,6 +178,10 @@ func main() {
 	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
 	fmt.Printf("UV index: " + fmt.Sprintf("%d", weatherObj.UltraViolet.GetIndex()) + ", UV risk: " + weatherObj.UltraViolet.GetRisk().String() + "\n")
+
+	fmt.Printf("Wind speed: " + fmt.Sprintf("%f", weatherObj.Wind.GetSpeed()) + "\n")
+	fmt.Printf("Wind Deg: " + fmt.Sprintf("%d", weatherObj.Wind.GetDeg()) + "\n")
+	fmt.Printf("Wind Gust: " + fmt.Sprintf("%f", weatherObj.Wind.GetGust()) + "\n")
 
 	weatherObj.Sunrise.SetCurrentFormatAsTimestamp()
 	weatherObj.Sunset.SetCurrentFormatAsTimestamp()
