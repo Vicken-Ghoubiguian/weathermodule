@@ -49,7 +49,7 @@ type WeatherModule struct {
 	Coords weatherClasses.Coordinates
 
 	//
-	Weather *weatherClasses.Weather
+	Weather weatherClasses.Weather
 
 	//
 	Temperature weatherClasses.Temperature
@@ -76,7 +76,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 
 	// Defining all of the intermediates variables
 	var currentCoordinates weatherClasses.Coordinates
-	var currentWeather *weatherClasses.Weather
+	var currentWeather weatherClasses.Weather
 	var currentTemperature weatherClasses.Temperature
 	var currentFeelingTemperature weatherClasses.Temperature
 	var currentMinimumTemperature weatherClasses.Temperature
@@ -138,7 +138,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentCoordinates.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
 
 		//
-		currentWeather = weatherClasses.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
+		currentWeather.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
 
 		//
 		currentTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())

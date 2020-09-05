@@ -10,9 +10,13 @@ type Weather struct {
 }
 
 //
-func InitializeWeather(idValue int64, mainValue string, descriptionValue string, icon string) *Weather {
+func (currentWeather *Weather) InitializeWeather(idValue int64, mainValue string, descriptionValue string, icon string) {
 
-	return &Weather{id: idValue, main: mainValue, description: descriptionValue, iconUrl: "https://openweathermap.org/img/wn/" + icon + ".png"}
+	//return &Weather{id: idValue, main: mainValue, description: descriptionValue, iconUrl: "https://openweathermap.org/img/wn/" + icon + ".png"}
+	currentWeather.id = idValue
+	currentWeather.main = mainValue
+	currentWeather.description = descriptionValue
+	currentWeather.iconUrl = "https://openweathermap.org/img/wn/" + icon + ".png"
 }
 
 //
