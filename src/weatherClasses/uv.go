@@ -28,7 +28,7 @@ type UV struct {
 }
 
 //
-func InitializeUV(value int64) *UV {
+func (currentUV *UV) InitializeUV(value int64) {
 
 	var determiedUVRisk UVRisk
 
@@ -54,7 +54,8 @@ func InitializeUV(value int64) *UV {
 
 	}
 
-	return &UV{index: value, risk: determiedUVRisk}
+	currentUV.index = value
+	currentUV.risk = determiedUVRisk
 }
 
 //

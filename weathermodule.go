@@ -68,7 +68,7 @@ type WeatherModule struct {
 	Sunset weatherClasses.SunTime
 
 	//
-	UltraViolet *weatherClasses.UV
+	UltraViolet weatherClasses.UV
 }
 
 // Defining the Weather initializer
@@ -85,7 +85,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 	var currentWind *weatherClasses.Wind
 	var currentSunrise weatherClasses.SunTime
 	var currentSunset weatherClasses.SunTime
-	var currentUV *weatherClasses.UV
+	var currentUV weatherClasses.UV
 
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city + "," + countrysISOAlpha2Code, apiKey)
@@ -158,7 +158,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentSunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
 		//
-		currentUV = weatherClasses.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
+		currentUV.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
 
 		// Displaying success message...
 		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
