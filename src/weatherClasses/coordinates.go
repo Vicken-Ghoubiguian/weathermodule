@@ -9,9 +9,10 @@ type Coordinates struct {
 }
 
 // Defining the Coordinates initializer
-func InitializeCoordinates(wishedongitude float64, wishedLatitude float64) *Coordinates {
+func (coords *Coordinates) InitializeCoordinates(wishedongitude float64, wishedLatitude float64) {
 
-	return &Coordinates{longitude: wishedongitude, latitude: wishedLatitude}
+	coords.longitude = wishedongitude
+	coords.latitude = wishedLatitude
 }
 
 //
