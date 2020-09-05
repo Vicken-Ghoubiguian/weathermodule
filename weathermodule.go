@@ -58,6 +58,9 @@ type WeatherModule struct {
 	MaxTemperature *weatherClasses.Temperature
 
 	//
+	Pressure *weatherClasses.Pressure
+
+	//
 	Wind *weatherClasses.Wind
 
 	//
@@ -78,6 +81,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 	var currentFeelingTemperature *weatherClasses.Temperature
 	var currentMinimumTemperature *weatherClasses.Temperature
 	var currentMaximumTemperature *weatherClasses.Temperature
+	var currentPressure *weatherClasses.Pressure
 	var currentWind *weatherClasses.Wind
 	var currentSunrise *weatherClasses.SunTime
 	var currentSunset *weatherClasses.SunTime
@@ -146,6 +150,9 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentWind = weatherClasses.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
 
 		//
+		currentPressure = weatherClasses.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+
+		//
 		currentSunrise = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
 		currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
@@ -156,5 +163,5 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
 	}
 
-	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Wind: currentWind, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
+	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Wind: currentWind, Pressure: currentPressure, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
 }
