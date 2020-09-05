@@ -52,10 +52,10 @@ type WeatherModule struct {
 	Weather *weatherClasses.Weather
 
 	//
-	Temperature *weatherClasses.Temperature
-	FeelingLikeTemperature *weatherClasses.Temperature
-	MinTemperature *weatherClasses.Temperature
-	MaxTemperature *weatherClasses.Temperature
+	Temperature weatherClasses.Temperature
+	FeelingLikeTemperature weatherClasses.Temperature
+	MinTemperature weatherClasses.Temperature
+	MaxTemperature weatherClasses.Temperature
 
 	//
 	Pressure weatherClasses.Pressure
@@ -77,10 +77,10 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 	// Defining all of the intermediates variables
 	var currentCoordinates weatherClasses.Coordinates
 	var currentWeather *weatherClasses.Weather
-	var currentTemperature *weatherClasses.Temperature
-	var currentFeelingTemperature *weatherClasses.Temperature
-	var currentMinimumTemperature *weatherClasses.Temperature
-	var currentMaximumTemperature *weatherClasses.Temperature
+	var currentTemperature weatherClasses.Temperature
+	var currentFeelingTemperature weatherClasses.Temperature
+	var currentMinimumTemperature weatherClasses.Temperature
+	var currentMaximumTemperature weatherClasses.Temperature
 	var currentPressure weatherClasses.Pressure
 	var currentWind *weatherClasses.Wind
 	var currentSunrise weatherClasses.SunTime
@@ -141,10 +141,10 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentWeather = weatherClasses.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
 
 		//
-		currentTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
-		currentFeelingTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
-		currentMinimumTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
-		currentMaximumTemperature = weatherClasses.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
+		currentTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
+		currentFeelingTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
+		currentMinimumTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
+		currentMaximumTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
 
 		//
 		currentWind = weatherClasses.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())

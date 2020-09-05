@@ -32,9 +32,11 @@ type Temperature struct {
 }
 
 // Defining the Temperature initializer
-func InitializeTemperature(value float64) *Temperature {
+func (temp *Temperature) InitializeTemperature(value float64) {
 
-	return &Temperature{temperatureValue: value, currentTemperatureScale: Kelvin, temperatureScaleSymbol: " K"}
+	temp.temperatureValue = value
+	temp.currentTemperatureScale = Kelvin
+	temp.temperatureScaleSymbol = " K"
 }
 
 // 'temperatureValue' attribute getter
