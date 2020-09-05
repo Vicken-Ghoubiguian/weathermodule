@@ -9,9 +9,11 @@ type Wind struct {
 }
 
 // Defining the Wind initializer
-func InitializeWind(wishedSpeed float64, wishedDeg int64, wishedGust float64) *Wind {
+func (currentWind *Wind) InitializeWind(wishedSpeed float64, wishedDeg int64, wishedGust float64) {
 
-	return &Wind{windSpeed: wishedSpeed, windDeg: wishedDeg, windGust: wishedGust}
+	currentWind.windSpeed = wishedSpeed
+	currentWind.windDeg = wishedDeg
+	currentWind.windGust = wishedGust
 }
 
 //
