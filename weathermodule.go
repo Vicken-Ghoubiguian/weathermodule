@@ -64,8 +64,8 @@ type WeatherModule struct {
 	Wind *weatherClasses.Wind
 
 	//
-	Sunrise *weatherClasses.SunTime
-	Sunset *weatherClasses.SunTime
+	Sunrise weatherClasses.SunTime
+	Sunset weatherClasses.SunTime
 
 	//
 	UltraViolet *weatherClasses.UV
@@ -83,8 +83,8 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 	var currentMaximumTemperature *weatherClasses.Temperature
 	var currentPressure *weatherClasses.Pressure
 	var currentWind *weatherClasses.Wind
-	var currentSunrise *weatherClasses.SunTime
-	var currentSunset *weatherClasses.SunTime
+	var currentSunrise weatherClasses.SunTime
+	var currentSunset weatherClasses.SunTime
 	var currentUV *weatherClasses.UV
 
 	// Defining the HTTP request's URL for weather and uv
@@ -153,8 +153,10 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentPressure = weatherClasses.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
 
 		//
-		currentSunrise = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
-		currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
+		//currentSunrise = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
+		//currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
+		currentSunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
+		currentSunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
 		//
 		currentUV = weatherClasses.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())

@@ -34,9 +34,11 @@ type SunTime struct {
 }
 
 //
-func InitializeSunTime(value int64) *SunTime {
+func (currentSunTime *SunTime) InitializeSunTime(value int64) {
 
-	return &SunTime{sunTimeInCurrentFormat: strconv.FormatInt(value, 10), currentFormat: Timestamp, asTimestamp: value}
+	currentSunTime.sunTimeInCurrentFormat = strconv.FormatInt(value, 10)
+	currentSunTime.currentFormat = Timestamp
+	currentSunTime.asTimestamp = value
 }
 
 //
