@@ -8,13 +8,15 @@ type Pressure struct {
 }
 
 //
-func InitializePressure(pressureValue float64) *Pressure {
+func (currentPressure *Pressure) InitializePressure(pressureValue float64) {
 
-	return &Pressure{value: pressureValue, unit: "hPa"}
+	currentPressure.value = pressureValue
+	currentPressure.unit = "hPa"
 }
 
 //
-func InitializePressureWithUnit(pressureValue float64, pressureUnit string) *Pressure {
+func (currentPressure *Pressure) InitializePressureWithUnit(pressureValue float64, pressureUnit string) {
 
-	return &Pressure{value: pressureValue, unit: pressureUnit}
+	currentPressure.value = pressureValue
+	currentPressure.unit = pressureUnit
 }

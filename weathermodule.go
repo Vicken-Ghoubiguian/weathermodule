@@ -58,7 +58,7 @@ type WeatherModule struct {
 	MaxTemperature *weatherClasses.Temperature
 
 	//
-	Pressure *weatherClasses.Pressure
+	Pressure weatherClasses.Pressure
 
 	//
 	Wind *weatherClasses.Wind
@@ -81,7 +81,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 	var currentFeelingTemperature *weatherClasses.Temperature
 	var currentMinimumTemperature *weatherClasses.Temperature
 	var currentMaximumTemperature *weatherClasses.Temperature
-	var currentPressure *weatherClasses.Pressure
+	var currentPressure weatherClasses.Pressure
 	var currentWind *weatherClasses.Wind
 	var currentSunrise weatherClasses.SunTime
 	var currentSunset weatherClasses.SunTime
@@ -150,11 +150,10 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentWind = weatherClasses.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
 
 		//
-		currentPressure = weatherClasses.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+		//currentPressure = weatherClasses.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+		currentPressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
 
 		//
-		//currentSunrise = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
-		//currentSunset = weatherClasses.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 		currentSunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
 		currentSunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
