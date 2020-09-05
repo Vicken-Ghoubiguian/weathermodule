@@ -23,6 +23,8 @@ func main() {
 
 	fmt.Printf("(" + fmt.Sprintf("%f", weatherObj.Coords.GetLongitude()) + ", " + fmt.Sprintf("%f", weatherObj.Coords.GetLatitude()) + ")\n")
 
+	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
+
 	weatherObj.Temperature.SetTemperatureAsCelsius()
 	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
