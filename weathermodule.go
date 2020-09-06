@@ -24,7 +24,7 @@ func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string
 // Function which display HTTP request error's code and message when the first occurs
 func owmErrorHandlerFunction(codeError string, errorMessage string) {
 
-	fmt.Println(weatherClasses.Red + "Occured error (" + codeError + "): " + errorMessage + weatherClasses.Reset)
+	fmt.Println(weatherClasses.Red() + "Occured error (" + codeError + "): " + errorMessage + weatherClasses.Reset())
 
 	fmt.Println("\n")
 
@@ -36,7 +36,7 @@ func otherErrorHandlerFunction(err error) {
 
 	if err != nil {
 
-		fmt.Println(weatherClasses.Red + err.Error() + weatherClasses.Reset)
+		fmt.Println(weatherClasses.Red() + err.Error() + weatherClasses.Reset())
 
 		os.Exit(1)
 	}
@@ -153,6 +153,6 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		w.UltraViolet.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
 
 		// Displaying success message...
-		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
+		fmt.Println(weatherClasses.Green() + "Weather implemented successfully !" + weatherClasses.Reset() + "\n")
 	}
 }

@@ -66,7 +66,7 @@ func (temp *Temperature) SetTemperatureAsKelvin() {
 		temp.currentTemperatureScale = Kelvin
 		temp.temperatureScaleSymbol = " K"
 
-		fmt.Printf(Green + "Temperature converted in Kelvin (K) successfully." + Reset + "\n")
+		fmt.Printf(Green() + "Temperature converted in Kelvin (K) successfully." + Reset() + "\n")
 
 	} else if temp.currentTemperatureScale == Fahrenheit {
 
@@ -74,11 +74,11 @@ func (temp *Temperature) SetTemperatureAsKelvin() {
 		temp.currentTemperatureScale = Kelvin
 		temp.temperatureScaleSymbol = " K"
 
-		fmt.Printf(Green + "Temperature converted in Kelvin (K) successfully." + Reset + "\n")
+		fmt.Printf(Green() + "Temperature converted in Kelvin (K) successfully." + Reset() + "\n")
 
 	} else {
 
-		fmt.Printf(Red + "Temperature already in Kelvin (K)" + Reset + ".\n")
+		fmt.Printf(Red() + "Temperature already in Kelvin (K)" + Reset() + ".\n")
 
 	}
 }
@@ -92,7 +92,7 @@ func (temp *Temperature) SetTemperatureAsCelsius() {
 		temp.currentTemperatureScale = Celsius
 		temp.temperatureScaleSymbol = " °C"
 
-		fmt.Printf(Green + "Temperature converted in Celsius (°C) successfully." + Reset + "\n")
+		fmt.Printf(Green() + "Temperature converted in Celsius (°C) successfully." + Reset() + "\n")
 
 	} else if temp.currentTemperatureScale == Fahrenheit {
 
@@ -100,11 +100,11 @@ func (temp *Temperature) SetTemperatureAsCelsius() {
 		temp.currentTemperatureScale = Celsius
 		temp.temperatureScaleSymbol = " °C"
 
-		fmt.Printf(Green + "Temperature converted in Celsius (°C) successfully." + Reset + "\n")
+		fmt.Printf(Green() + "Temperature converted in Celsius (°C) successfully." + Reset() + "\n")
 
 	} else {
 
-		fmt.Printf(Red + "Temperature already in Celsius (°C)." + Reset + "\n")
+		fmt.Printf(Red() + "Temperature already in Celsius (°C)." + Reset() + "\n")
 
 	}
 }
@@ -118,7 +118,7 @@ func (temp *Temperature) SetTemperatureAsFahrenheit() {
 		temp.currentTemperatureScale = Fahrenheit
                 temp.temperatureScaleSymbol = " °F"
 
-		fmt.Printf(Green + "Temperature converted in Fahrenheit (°F) successfully." + Reset + "\n")
+		fmt.Printf(Green() + "Temperature converted in Fahrenheit (°F) successfully." + Reset() + "\n")
 
 	} else if temp.currentTemperatureScale == Celsius {
 
@@ -126,11 +126,11 @@ func (temp *Temperature) SetTemperatureAsFahrenheit() {
 		temp.currentTemperatureScale = Fahrenheit
                 temp.temperatureScaleSymbol = " °F"
 
-		fmt.Printf(Green + "Temperature converted in Fahrenheit (°F) successfully." + Reset + "\n")
+		fmt.Printf(Green() + "Temperature converted in Fahrenheit (°F) successfully." + Reset() + "\n")
 
 	} else {
 
-		fmt.Printf(Red + "Temperature already in Fahrenheit (°F)." + Reset + "\n")
+		fmt.Printf(Red() + "Temperature already in Fahrenheit (°F)." + Reset() + "\n")
 
 	}
 }

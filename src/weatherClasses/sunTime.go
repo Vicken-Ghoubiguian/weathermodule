@@ -69,6 +69,6 @@ func (currentSunTime *SunTime) SetCurrentFormatAsTimestamp() {
 
 	} else {
 
-		fmt.Printf(Red + "Suntime already in Timestamp." + Reset + "\n")
+		fmt.Printf(Red() + "Suntime already in Timestamp." + Reset() + "\n")
 	}
 }
