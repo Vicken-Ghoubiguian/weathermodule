@@ -1,11 +1,6 @@
 package weatherClasses
 
 // Definition of all colors used in the weatherModule package
-/*var Red string = "\033[31m"
-var Green string = "\033[32m"
-var Cyan string = "\033[36m"
-var Reset string = "\033[0m"*/
-
 const (
 	red = "\033[31m"
 	green = "\033[32m"
@@ -13,21 +8,26 @@ const (
 	reset = "\033[0m"
 )
 
+
+// Return the green color
 func Green() string {
 
 	return green
 }
-
+color red
+// Return the red color
 func Red() string {
 
 	return red
 }
 
+// Return the cyan color
 func Cyan() string {
 
 	return cyan
 }
 
+// Return the reset string
 func Reset() string {
 
 	return reset
