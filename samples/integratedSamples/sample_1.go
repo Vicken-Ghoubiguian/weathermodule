@@ -11,13 +11,16 @@ import (
 func main() {
 
 	//
+	var weatherObj weathermodule.WeatherModule
+
+	//
 	city := flag.String("city", "", "The city whose you want weather")
 	countryCode := flag.String("countryCode", "", "The ISO 3166-1 alpha-2 or the ISO 3166-1 alpha-3 code of the wished country")
 	apiKey := flag.String("apiKey", "", "The OpenWeatherMap API key")
 
 	flag.Parse()
 
-	weatherObj := weathermodule.InitializeWeatherModule(*city, *countryCode, *apiKey)
+	weatherObj.InitializeWeatherModule(*city, *countryCode, *apiKey)
 
 	fmt.Printf("Weather (" + weatherObj.Weather.GetMain() + ", " + weatherObj.Weather.GetDescription() + ", " + weatherObj.Weather.GetIconUrl() + ")\n")
 
