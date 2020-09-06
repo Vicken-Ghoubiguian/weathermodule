@@ -61,6 +61,9 @@ type WeatherModule struct {
 	Pressure weatherClasses.Pressure
 
 	//
+	Humidity int64
+
+	//
 	Wind weatherClasses.Wind
 
 	//
@@ -82,6 +85,7 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 	var currentMinimumTemperature weatherClasses.Temperature
 	var currentMaximumTemperature weatherClasses.Temperature
 	var currentPressure weatherClasses.Pressure
+	var currentHumidity int64
 	var currentWind weatherClasses.Wind
 	var currentSunrise weatherClasses.SunTime
 	var currentSunset weatherClasses.SunTime
@@ -150,8 +154,10 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		currentWind.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
 
 		//
-		//currentPressure = weatherClasses.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
 		currentPressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+
+		//
+		currentHumidity = gjson.Get(string(weatherJsonString), "main.humidity").Int()
 
 		//
 		currentSunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
@@ -164,5 +170,5 @@ func InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey s
 		fmt.Println(weatherClasses.Green + "Weather implemented successfully !" + weatherClasses.Reset + "\n")
 	}
 
-	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Wind: currentWind, Pressure: currentPressure, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
+	return &WeatherModule{Coords: currentCoordinates, Weather: currentWeather, Temperature: currentTemperature, FeelingLikeTemperature: currentFeelingTemperature, MinTemperature: currentMinimumTemperature, MaxTemperature: currentMaximumTemperature, Wind: currentWind, Pressure: currentPressure, Humidity: currentHumidity, Sunrise: currentSunrise, Sunset: currentSunset, UltraViolet: currentUV}
 }
