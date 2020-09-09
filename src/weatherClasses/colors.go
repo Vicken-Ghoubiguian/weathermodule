@@ -14,7 +14,7 @@ func Green() string {
 
 	return green
 }
-color red
+
 // Return the red color
 func Red() string {
 

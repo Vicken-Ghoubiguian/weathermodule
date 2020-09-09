@@ -156,3 +156,15 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		fmt.Println(weatherClasses.Green() + "Weather implemented successfully !" + weatherClasses.Reset() + "\n")
 	}
 }
+
+//
+func (w *WeatherModule) GetCoords() weatherClasses.Coordinates {
+
+	return w.Coords
+}
+
+//
+func (w *WeatherModule) GetWeather() weatherClasses.Weather {
+
+	return w.Weather
+}
