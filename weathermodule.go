@@ -168,3 +168,39 @@ func (w *WeatherModule) GetWeather() weatherClasses.Weather {
 
 	return w.Weather
 }
+
+//
+func (w *WeatherModule) GetPressure() weatherClasses.Pressure {
+
+	return w.Pressure
+}
+
+//
+func (w *WeatherModule) GetHumidity() int64 {
+
+	return w.Humidity
+}
+
+//
+func (w *WeatherModule) GetWind() weatherClasses.Wind {
+
+	return w.Wind
+}
+
+//
+func (w *WeatherModule) GetSunrise() weatherClasses.SunTime {
+
+	return w.Sunrise
+}
+
+//
+func (w *WeatherModule) GetSunset() weatherClasses.SunTime {
+
+	return w.Sunset
+}
+
+//
+func (w *WeatherModule) GetUltraViolet() weatherClasses.UV {
+
+	return w.UltraViolet
+}
