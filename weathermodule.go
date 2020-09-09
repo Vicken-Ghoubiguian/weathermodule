@@ -46,32 +46,32 @@ func otherErrorHandlerFunction(err error) {
 type WeatherModule struct {
 
 	//
-	Coords weatherClasses.Coordinates
+	coords weatherClasses.Coordinates
 
 	//
-	Weather weatherClasses.Weather
+	weather weatherClasses.Weather
 
 	//
-	Temperature weatherClasses.Temperature
-	FeelingLikeTemperature weatherClasses.Temperature
-	MinTemperature weatherClasses.Temperature
-	MaxTemperature weatherClasses.Temperature
+	temperature weatherClasses.Temperature
+	feelingLikeTemperature weatherClasses.Temperature
+	minTemperature weatherClasses.Temperature
+	maxTemperature weatherClasses.Temperature
 
 	//
-	Pressure weatherClasses.Pressure
+	pressure weatherClasses.Pressure
 
 	//
-	Humidity int64
+	humidity int64
 
 	//
-	Wind weatherClasses.Wind
+	wind weatherClasses.Wind
 
 	//
-	Sunrise weatherClasses.SunTime
-	Sunset weatherClasses.SunTime
+	sunrise weatherClasses.SunTime
+	sunset weatherClasses.SunTime
 
 	//
-	UltraViolet weatherClasses.UV
+	ultraViolet weatherClasses.UV
 }
 
 // Defining the Weather initializer
@@ -125,32 +125,32 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
 
 		//
-		w.Coords.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
+		w.coords.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
 
 		//
-		w.Weather.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
+		w.weather.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
 
 		//
-		w.Temperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
-		w.FeelingLikeTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
-		w.MinTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
-		w.MaxTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
+		w.temperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
+		w.feelingLikeTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
+		w.minTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
+		w.maxTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
 
 		//
-		w.Wind.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
+		w.wind.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
 
 		//
-		w.Pressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+		w.pressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
 
 		//
-		w.Humidity = gjson.Get(string(weatherJsonString), "main.humidity").Int()
+		w.humidity = gjson.Get(string(weatherJsonString), "main.humidity").Int()
 
 		//
-		w.Sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
-		w.Sunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
+		w.sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
+		w.sunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
 		//
-		w.UltraViolet.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
+		w.ultraViolet.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
 
 		// Displaying success message...
 		fmt.Println(weatherClasses.Green() + "Weather implemented successfully !" + weatherClasses.Reset() + "\n")
@@ -160,71 +160,71 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 //
 func (w *WeatherModule) GetCoords() *weatherClasses.Coordinates {
 
-	return &w.Coords
+	return &w.coords
 }
 
 //
 func (w *WeatherModule) GetWeather() *weatherClasses.Weather {
 
-	return &w.Weather
+	return &w.weather
 }
 
 //
 func (w *WeatherModule) GetTemperature() *weatherClasses.Temperature {
 
-	return &w.Temperature
+	return &w.temperature
 }
 
 //
 func (w *WeatherModule) GetFeelingLikeTemperature() *weatherClasses.Temperature {
 
-	return &w.FeelingLikeTemperature
+	return &w.feelingLikeTemperature
 }
 
 //
 func (w *WeatherModule) GetMinTemperature() *weatherClasses.Temperature {
 
-	return &w.MinTemperature
+	return &w.minTemperature
 }
 
 //
 func (w *WeatherModule) GetMaxTemperature() *weatherClasses.Temperature {
 
-	return &w.MaxTemperature
+	return &w.maxTemperature
 }
 
 //
 func (w *WeatherModule) GetPressure() *weatherClasses.Pressure {
 
-	return &w.Pressure
+	return &w.pressure
 }
 
 //
 func (w *WeatherModule) GetHumidity() int64 {
 
-	return w.Humidity
+	return w.humidity
 }
 
 //
 func (w *WeatherModule) GetWind() *weatherClasses.Wind {
 
-	return &w.Wind
+	return &w.wind
 }
 
 //
 func (w *WeatherModule) GetSunrise() *weatherClasses.SunTime {
 
-	return &w.Sunrise
+	return &w.sunrise
 }
 
 //
 func (w *WeatherModule) GetSunset() *weatherClasses.SunTime {
 
-	return &w.Sunset
+	return &w.sunset
 }
 
 //
 func (w *WeatherModule) GetUltraViolet() *weatherClasses.UV {
 
-	return &w.UltraViolet
+	return &w.ultraViolet
 }
