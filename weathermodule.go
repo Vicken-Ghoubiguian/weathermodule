@@ -170,6 +170,30 @@ func (w *WeatherModule) GetWeather() *weatherClasses.Weather {
 }
 
 //
+func (w *WeatherModule) GetTemperature() *weatherClasses.Temperature {
+
+	return &w.Temperature
+}
+
+//
+func (w *WeatherModule) GetFeelingLikeTemperature() *weatherClasses.Temperature {
+
+	return &w.FeelingLikeTemperature
+}
+
+//
+func (w *WeatherModule) GetMinTemperature() *weatherClasses.Temperature {
+
+	return &w.MinTemperature
+}
+
+//
+func (w *WeatherModule) GetMaxTemperature() *weatherClasses.Temperature {
+
+	return &w.MaxTemperature
+}
+
+//
 func (w *WeatherModule) GetPressure() *weatherClasses.Pressure {
 
 	return &w.Pressure
