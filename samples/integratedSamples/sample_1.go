@@ -37,15 +37,15 @@ func main() {
 	weatherObj.Temperature.SetTemperatureAsKelvin()
 	fmt.Printf("Temperature (in " + weatherObj.Temperature.GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.Temperature.GetTemperatureValue()) + weatherObj.Temperature.GetTemperatureScaleSymbol() + "\n")
 
-	fmt.Printf("UV index: " + fmt.Sprintf("%d", weatherObj.UltraViolet.GetIndex()) + ", UV risk: " + weatherObj.UltraViolet.GetRisk().String() + "\n")
+	fmt.Printf("UV index: " + fmt.Sprintf("%d", weatherObj.GetUltraViolet().GetIndex()) + ", UV risk: " + weatherObj.GetUltraViolet().GetRisk().String() + "\n")
 
-	fmt.Printf("Wind speed: " + fmt.Sprintf("%f", weatherObj.Wind.GetSpeed()) + "\n")
-	fmt.Printf("Wind Deg: " + fmt.Sprintf("%d", weatherObj.Wind.GetDeg()) + "\n")
-	fmt.Printf("Wind Gust: " + fmt.Sprintf("%f", weatherObj.Wind.GetGust()) + "\n")
+	fmt.Printf("Wind speed: " + fmt.Sprintf("%f", weatherObj.GetWind().GetSpeed()) + "\n")
+	fmt.Printf("Wind Deg: " + fmt.Sprintf("%d", weatherObj.GetWind().GetDeg()) + "\n")
+	fmt.Printf("Wind Gust: " + fmt.Sprintf("%f", weatherObj.GetWind().GetGust()) + "\n")
 
-	weatherObj.Sunrise.SetCurrentFormatAsTimestamp()
-	weatherObj.Sunset.SetCurrentFormatAsTimestamp()
+	weatherObj.GetSunrise().SetCurrentFormatAsTimestamp()
+	weatherObj.GetSunset().SetCurrentFormatAsTimestamp()
 
-	fmt.Printf("Sunrise (as " + weatherObj.Sunrise.GetCurrentFormat().String() + "): " + weatherObj.Sunrise.GetSunTimeInCurrentFormat() + "\n")
-	fmt.Printf("Sunset (as " + weatherObj.Sunset.GetCurrentFormat().String() + "): " + weatherObj.Sunset.GetSunTimeInCurrentFormat() + "\n")
+	fmt.Printf("Sunrise (as " + weatherObj.GetSunrise().GetCurrentFormat().String() + "): " + weatherObj.GetSunrise().GetSunTimeInCurrentFormat() + "\n")
+	fmt.Printf("Sunset (as " + weatherObj.GetSunset().GetCurrentFormat().String() + "): " + weatherObj.GetSunset().GetSunTimeInCurrentFormat() + "\n")
 }
