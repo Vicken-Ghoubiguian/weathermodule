@@ -164,9 +164,9 @@ func (w *WeatherModule) GetCoords() weatherClasses.Coordinates {
 }
 
 //
-func (w *WeatherModule) GetWeather() weatherClasses.Weather {
+func (w *WeatherModule) GetWeather() *weatherClasses.Weather {
 
-	return w.Weather
+	return &w.Weather
 }
 
 //
