@@ -158,9 +158,9 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 }
 
 //
-func (w *WeatherModule) GetCoords() weatherClasses.Coordinates {
+func (w *WeatherModule) GetCoords() *weatherClasses.Coordinates {
 
-	return w.Coords
+	return &w.Coords
 }
 
 //
