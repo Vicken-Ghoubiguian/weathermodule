@@ -41,6 +41,10 @@ type WeatherModule struct {
 	sunset weatherClasses.SunTime
 
 	//
+	countryCode string
+	city string
+
+	//
 	ultraViolet weatherClasses.UV
 }
 
@@ -191,6 +195,18 @@ func (w *WeatherModule) GetSunrise() *weatherClasses.SunTime {
 func (w *WeatherModule) GetSunset() *weatherClasses.SunTime {
 
 	return &w.sunset
+}
+
+//
+func (w *WeatherModule) GetCountryCode() string {
+
+	return w.countryCode
+}
+
+//
+func (w *WeatherModule) GetCity() string {
+
+	return w.city
 }
 
 //
