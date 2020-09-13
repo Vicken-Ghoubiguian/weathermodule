@@ -3,7 +3,7 @@ package weathermodule
 // Import all necessary packages
 import (
 	"fmt"
-	"os"
+	"usefulFunctions"
 	"weatherClasses"
 	"io/ioutil"
 	"net/http"
@@ -14,33 +14,12 @@ import (
 import "github.com/tidwall/gjson"
 
 // Function which extracts weather datas from JSON response
-func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string {
+/*func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string {
 
 	brutWeatherWithoutHooks := strings.Trim(weatherFromHTTPResponseString, "[]")
 
 	return brutWeatherWithoutHooks
-}
-
-// Function which display HTTP request error's code and message when the first occurs
-func owmErrorHandlerFunction(codeError string, errorMessage string) {
-
-	fmt.Println(weatherClasses.Red() + "Occured error (" + codeError + "): " + errorMessage + weatherClasses.Reset())
-
-	fmt.Println("\n")
-
-	os.Exit(1)
-}
-
-// Function which display other errors when they occurs
-func otherErrorHandlerFunction(err error) {
-
-	if err != nil {
-
-		fmt.Println(weatherClasses.Red() + err.Error() + weatherClasses.Reset())
-
-		os.Exit(1)
-	}
-}
+}*/
 
 // Defining the type 'Weather' which recover and manage current weather in a defined city
 type WeatherModule struct {
@@ -84,13 +63,13 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 	weatherResp, err := http.Get(weatherRequest)
 
 	//
-	otherErrorHandlerFunction(err)
+	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	weatherJsonString, err := ioutil.ReadAll(weatherResp.Body)
 
 	//
-	otherErrorHandlerFunction(err)
+	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	owmCode := gjson.Get(string(weatherJsonString), "cod")
@@ -101,8 +80,8 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		//
 		owmMessage := gjson.Get(string(weatherJsonString), "message")
 
-		// Calling the 'owmErrorHandlerFunction' to treat the current error...
-		owmErrorHandlerFunction(owmCode.String(), owmMessage.String())
+		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
+		usefulFunctions.OwmErrorHandlerFunction(owmCode.String(), weatherClasses.Red(), owmMessage.String(), weatherClasses.Reset())
 
 	} else {
 
@@ -113,16 +92,16 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		uvResp, err := http.Get(uvRequest)
 
 		//
-		otherErrorHandlerFunction(err)
+		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		uvJsonString, err := ioutil.ReadAll(uvResp.Body)
 
 		//
-		otherErrorHandlerFunction(err)
+		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
-		weather := extractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
 
 		//
 		w.coords.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())

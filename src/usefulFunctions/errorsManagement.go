@@ -7,7 +7,7 @@ import (
 )
 
 // Function which display HTTP request error's code and message when the first occurs, with color and reset strings
-func owmErrorHandlerFunction(codeError string, color string, errorMessage string, reset string) {
+func OwmErrorHandlerFunction(codeError string, color string, errorMessage string, reset string) {
 
         fmt.Println(color + "Occured error (" + codeError + "): " + errorMessage + reset)
 
@@ -17,7 +17,7 @@ func owmErrorHandlerFunction(codeError string, color string, errorMessage string
 }
 
 // Function which display other errors when they occurs, with color and reset strings
-func otherErrorHandlerFunction(err error, color string, reset string) {
+func OtherErrorHandlerFunction(err error, color string, reset string) {
 
         if err != nil {
 
