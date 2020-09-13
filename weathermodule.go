@@ -12,14 +12,6 @@ import (
 // Importation of the github project gjson to treat received json
 import "github.com/tidwall/gjson"
 
-// Function which extracts weather datas from JSON response
-/*func extractWeatherFromJSONFunction(weatherFromHTTPResponseString string) string {
-
-	brutWeatherWithoutHooks := strings.Trim(weatherFromHTTPResponseString, "[]")
-
-	return brutWeatherWithoutHooks
-}*/
-
 // Defining the type 'Weather' which recover and manage current weather in a defined city
 type WeatherModule struct {
 
