@@ -22,6 +22,8 @@ func main() {
 
 	weatherObj.InitializeWeatherModule(*city, *countryCode, *apiKey)
 
+	fmt.Printf("" + weatherObj.GetCity() + " (" + weatherObj.GetCountryCode() + ")\n")
+
 	fmt.Printf("Weather (" + weatherObj.GetWeather().GetMain() + ", " + weatherObj.GetWeather().GetDescription() + ", " + weatherObj.GetWeather().GetIconUrl() + ")\n")
 
 	fmt.Printf("(" + fmt.Sprintf("%f", weatherObj.GetCoords().GetLongitude()) + ", " + fmt.Sprintf("%f", weatherObj.GetCoords().GetLatitude()) + ")\n")

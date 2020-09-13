@@ -120,6 +120,12 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		w.humidity = gjson.Get(string(weatherJsonString), "main.humidity").Int()
 
 		//
+		w.countryCode = gjson.Get(string(weatherJsonString), "sys.country").String()
+
+		//
+		w.city = gjson.Get(string(weatherJsonString), "name").String()
+
+		//
 		w.sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
 		w.sunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
 
