@@ -7,7 +7,6 @@ import (
 	"weatherClasses"
 	"io/ioutil"
 	"net/http"
-	"strings"
 )
 
 // Importation of the github project gjson to treat received json
