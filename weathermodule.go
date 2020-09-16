@@ -45,6 +45,9 @@ type WeatherModule struct {
 	city string
 
 	//
+	currentLanguage weatherClasses.Language
+
+	//
 	ultraViolet weatherClasses.UV
 }
 
@@ -213,6 +216,12 @@ func (w *WeatherModule) GetCountryCode() string {
 func (w *WeatherModule) GetCity() string {
 
 	return w.city
+}
+
+//
+func (w *WeatherModule) GetLanguage() *weatherClasses.Language {
+
+	return &w.currentLanguage
 }
 
 //
