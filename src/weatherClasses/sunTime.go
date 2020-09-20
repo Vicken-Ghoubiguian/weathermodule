@@ -26,6 +26,19 @@ func (timeFormat sunTimeFormat) String() string {
 }
 
 //
+func timePresentationFunction(examinedInt int) string {
+
+	if examinedInt < 0 {
+	
+		return "0" + strconv.Itoa(examinedInt)
+		
+	} else {
+		
+		return strconv.Itoa(examinedInt)
+	}
+}
+
+//
 type SunTime struct {
 
 	//
@@ -66,7 +79,7 @@ func (currentSunTime *SunTime) SetCurrentFormatAsDMYHMS() {
 	if currentSunTime.currentFormat != DMYHMSFormat {
 
 		wishedTime := time.Unix(currentSunTime.asTimestamp, 0)
-		currentSunTime.sunTimeInCurrentFormat = strconv.Itoa(wishedTime.Day()) + "/" + wishedTime.Month().String() + "/" + strconv.Itoa(wishedTime.Year()) + " " + strconv.Itoa(wishedTime.Hour()) + ":" + strconv.Itoa(wishedTime.Minute()) + ":" + strconv.Itoa(wishedTime.Second())
+		currentSunTime.sunTimeInCurrentFormat = timePresentationFunction(wishedTime.Day()) + "/" + wishedTime.Month().String() + "/" + timePresentationFunction(wishedTime.Year()) + " " + timePresentationFunction(wishedTime.Hour()) + ":" + timePresentationFunction(wishedTime.Minute()) + ":" + timePresentationFunction(wishedTime.Second())
 		currentSunTime.currentFormat = DMYHMSFormat
 		
 		fmt.Printf(Green() + "Suntime converted in DMYHMS successfully." + Reset() + "\n")
@@ -83,7 +96,7 @@ func (currentSunTime *SunTime) SetCurrentFormatAsYMDHMS() {
 	if currentSunTime.currentFormat != YMDHMSFormat {
 
 		wishedTime := time.Unix(currentSunTime.asTimestamp, 0)
-		currentSunTime.sunTimeInCurrentFormat = strconv.Itoa(wishedTime.Year()) + "/" + wishedTime.Month().String() + "/" + strconv.Itoa(wishedTime.Day()) + " " + strconv.Itoa(wishedTime.Hour()) + ":" + strconv.Itoa(wishedTime.Minute()) + ":" + strconv.Itoa(wishedTime.Second())
+		currentSunTime.sunTimeInCurrentFormat = timePresentationFunction(wishedTime.Year()) + "/" + wishedTime.Month().String() + "/" + timePresentationFunction(wishedTime.Day()) + " " + timePresentationFunction(wishedTime.Hour()) + ":" + timePresentationFunction(wishedTime.Minute()) + ":" + timePresentationFunction(wishedTime.Second())
 		currentSunTime.currentFormat = YMDHMSFormat
 		
 		fmt.Printf(Green() + "Suntime converted in YMDHMS successfully." + Reset() + "\n")
@@ -100,7 +113,7 @@ func (currentSunTime *SunTime) SetCurrentFormatAsMDYHMS() {
 	if currentSunTime.currentFormat != MDYHMSFormat {
 
 		wishedTime := time.Unix(currentSunTime.asTimestamp, 0)
-		currentSunTime.sunTimeInCurrentFormat = wishedTime.Month().String() + "/" + strconv.Itoa(wishedTime.Day()) + "/" + strconv.Itoa(wishedTime.Year()) + " " + strconv.Itoa(wishedTime.Hour()) + ":" + strconv.Itoa(wishedTime.Minute()) + ":" + strconv.Itoa(wishedTime.Second())
+		currentSunTime.sunTimeInCurrentFormat = wishedTime.Month().String() + "/" + timePresentationFunction(wishedTime.Day()) + "/" + timePresentationFunction(wishedTime.Year()) + " " + timePresentationFunction(wishedTime.Hour()) + ":" + timePresentationFunction(wishedTime.Minute()) + ":" + timePresentationFunction(wishedTime.Second())
 		currentSunTime.currentFormat = MDYHMSFormat
 		
 		fmt.Printf(Green() + "Suntime converted in MDYHMS successfully." + Reset() + "\n")
