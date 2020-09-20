@@ -20,11 +20,14 @@ func main() {
 	temperatureScale := flag.String("temperatureScale", "", "The choosen temperature scale")
 
 	flag.Parse()
+
+	//
+	temperatureScaleValue := *temperatureScale
 	
 	//
 	weatherObj.InitializeWeatherModule(*city, *countryCode, *apiKey)
 	
-	if temperatureScale == "Celsius" || temperatureScale == "Fahrenheit" || temperatureScale == "Kelvin"{
+	if temperatureScaleValue == "Celsius" || temperatureScaleValue == "Fahrenheit" || temperatureScaleValue == "Kelvin"{
 
 		fmt.Printf("" + weatherObj.GetCity() + " (" + weatherObj.GetCountryCode() + ")\n")
 
@@ -34,14 +37,14 @@ func main() {
 
 		fmt.Printf("Temperature (in " + weatherObj.GetTemperature().GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetTemperature().GetTemperatureValue()) + weatherObj.GetTemperature().GetTemperatureScaleSymbol() + "\n")
 
-		if temperatureScale == "Celsius" {
+		if temperatureScaleValue == "Celsius" {
 		
 			weatherObj.GetTemperature().SetTemperatureAsCelsius()
 			weatherObj.GetFeelingLikeTemperature().SetTemperatureAsCelsius()
 			weatherObj.GetMinTemperature().SetTemperatureAsCelsius()
 			weatherObj.GetMaxTemperature().SetTemperatureAsCelsius()
 		
-		} else if temperatureScale == "Fahrenheit" {
+		} else if temperatureScaleValue == "Fahrenheit" {
 		
 			weatherObj.GetTemperature().SetTemperatureAsFahrenheit()
 			weatherObj.GetFeelingLikeTemperature().SetTemperatureAsFahrenheit()
