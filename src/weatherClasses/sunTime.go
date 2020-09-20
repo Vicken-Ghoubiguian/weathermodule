@@ -60,6 +60,39 @@ func (currentSunTime *SunTime) GetSunTimeAsTimestamp() int64 {
 }
 
 //
+func (currentSunTime *SunTime) SetCurrentFormatAsDMYHMS() {
+
+	if currentSunTime.currentFormat != DMYHMSFormat {
+
+        } else {
+
+                fmt.Printf(Red() + "Suntime already in DMYHMS." + Reset() + "\n")
+        }
+}
+
+//
+func (currentSunTime *SunTime) SetCurrentFormatAsYMDHMS() {
+
+	if currentSunTime.currentFormat != YMDHMSFormat {
+
+        } else {
+
+                fmt.Printf(Red() + "Suntime already in YMDHMS." + Reset() + "\n")
+        }
+}
+
+//
+func (currentSunTime *SunTime) SetCurrentFormatAsMDYHMS() {
+
+	if currentSunTime.currentFormat != MDYHMSFormat {
+
+	} else {
+
+		fmt.Printf(Red() + "Suntime already in MDYHMS." + Reset() + "\n")
+	}
+}
+
+//
 func (currentSunTime *SunTime) SetCurrentFormatAsTimestamp() {
 
 	if currentSunTime.currentFormat != Timestamp {
