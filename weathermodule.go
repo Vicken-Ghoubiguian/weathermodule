@@ -41,8 +41,7 @@ type WeatherModule struct {
 	sunset weatherClasses.SunTime
 
 	//
-	countryCode string
-	city string
+	geographicLocation weatherClasses.GeographicLocation
 
 	//
 	currentLanguage weatherClasses.Language
@@ -123,10 +122,7 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		w.humidity.InitializeHumidity(gjson.Get(string(weatherJsonString), "main.humidity").Int())
 
 		//
-		w.countryCode = gjson.Get(string(weatherJsonString), "sys.country").String()
-
-		//
-		w.city = gjson.Get(string(weatherJsonString), "name").String()
+		w.geographicLocation.InitializeGeographicLocation(gjson.Get(string(weatherJsonString), "sys.country").String(), gjson.Get(string(weatherJsonString), "name").String())
 
 		//
 		w.sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
@@ -212,10 +208,7 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 		w.humidity.InitializeHumidity(gjson.Get(string(weatherJsonString), "main.humidity").Int())
 
 		//
-		w.countryCode = gjson.Get(string(weatherJsonString), "sys.country").String()
-
-		//
-		w.city = gjson.Get(string(weatherJsonString), "name").String()
+		w.geographicLocation.InitializeGeographicLocation(gjson.Get(string(weatherJsonString), "sys.country").String(), gjson.Get(string(weatherJsonString), "name").String())
 
 		//
 		w.sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
@@ -296,15 +289,9 @@ func (w *WeatherModule) GetSunset() *weatherClasses.SunTime {
 }
 
 //
-func (w *WeatherModule) GetCountryCode() string {
+func (w *WeatherModule) GetGeographicLocation() *weatherClasses.GeographicLocation {
 
-	return w.countryCode
-}
-
-//
-func (w *WeatherModule) GetCity() string {
-
-	return w.city
+	return &w.geographicLocation
 }
 
 //

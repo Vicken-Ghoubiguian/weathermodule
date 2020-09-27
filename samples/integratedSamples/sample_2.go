@@ -21,7 +21,7 @@ func main() {
 
 	weatherObj.InitializeMinimallyWeatherModule(*city, *apiKey)
 
-	fmt.Printf("" + weatherObj.GetCity() + " (" + weatherObj.GetCountryCode() + ")\n")
+	fmt.Printf("" + weatherObj.GetGeographicLocation().GetCityName() + " (" + weatherObj.GetGeographicLocation().GetCountryCode() + ")\n")
 
 	fmt.Printf("Weather (" + weatherObj.GetWeather().GetMain() + ", " + weatherObj.GetWeather().GetDescription() + ", " + weatherObj.GetWeather().GetIconUrl() + ")\n")
 
