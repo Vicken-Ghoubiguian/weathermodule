@@ -31,7 +31,7 @@ type WeatherModule struct {
 	pressure weatherClasses.Pressure
 
 	//
-	humidity int64
+	humidity weatherClasses.Humidity
 
 	//
 	wind weatherClasses.Wind
@@ -120,7 +120,7 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		w.pressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
 
 		//
-		w.humidity = gjson.Get(string(weatherJsonString), "main.humidity").Int()
+		w.humidity.InitializeHumidity(gjson.Get(string(weatherJsonString), "main.humidity").Int())
 
 		//
 		w.countryCode = gjson.Get(string(weatherJsonString), "sys.country").String()
@@ -209,7 +209,7 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 		w.pressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
 
 		//
-		w.humidity = gjson.Get(string(weatherJsonString), "main.humidity").Int()
+		w.humidity.InitializeHumidity(gjson.Get(string(weatherJsonString), "main.humidity").Int())
 
 		//
 		w.countryCode = gjson.Get(string(weatherJsonString), "sys.country").String()
@@ -272,9 +272,9 @@ func (w *WeatherModule) GetPressure() *weatherClasses.Pressure {
 }
 
 //
-func (w *WeatherModule) GetHumidity() int64 {
+func (w *WeatherModule) GetHumidity() *weatherClasses.Humidity {
 
-	return w.humidity
+	return &w.humidity
 }
 
 //
