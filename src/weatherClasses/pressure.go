@@ -1,22 +1,54 @@
 package weatherClasses
 
 //
+type PressureScale int
+
+//
+const (
+
+	HectoPascal PressureScale = iota
+	Pascal
+	Bar
+	Atmosphere
+	Torr
+)
+
+//
+type (pressureUnitScale PressureScale) String() string {
+
+	return [...]string{"hectoPascal", "pascal", "bar", "atmosphere", "torr"}[pressureUnitScale]
+}
+
+//
 type Pressure struct {
 
 	value float64
-	unit string
+	scaleUnit PressureScale
+	symbolUnit string
 }
 
 //
 func (currentPressure *Pressure) InitializePressure(pressureValue float64) {
 
 	currentPressure.value = pressureValue
-	currentPressure.unit = "hPa"
+	currentPressure.scaleUnit = HectoPascal
+	currentPressure.symbolUnit = "hPa"
 }
 
 //
-func (currentPressure *Pressure) InitializePressureWithUnit(pressureValue float64, pressureUnit string) {
+func (currentPressure *Pressure) getPressureValue() int64 {
 
-	currentPressure.value = pressureValue
-	currentPressure.unit = pressureUnit
+	return currentPressure.value
+}
+
+//
+func (currentPressure *Pressure) getPressureScale() PressureScale {
+
+	return currentPressure.scaleUnit
+}
+
+//
+func (currentPressure *Pressure) getPressureSymbolUnit() string {
+
+	return currentPressure.symbolUnit
 }
