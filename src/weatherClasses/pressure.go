@@ -14,7 +14,7 @@ const (
 )
 
 //
-type (pressureUnitScale PressureScale) String() string {
+func (pressureUnitScale PressureScale) String() string {
 
 	return [...]string{"hectoPascal", "pascal", "bar", "atmosphere", "torr"}[pressureUnitScale]
 }
@@ -36,7 +36,7 @@ func (currentPressure *Pressure) InitializePressure(pressureValue float64) {
 }
 
 //
-func (currentPressure *Pressure) getPressureValue() int64 {
+func (currentPressure *Pressure) getPressureValue() float64 {
 
 	return currentPressure.value
 }
