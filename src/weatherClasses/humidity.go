@@ -11,7 +11,7 @@ type Humidity struct {
 func (currentHumidity *Humidity) InitializeHumidity(humidityValue int64) {
 
 	currentHumidity.value = humidityValue
-	currentHumidity.unitScale = "%"
+	currentHumidity.unitScale = "%%"
 }
 
 //
