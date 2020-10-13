@@ -36,6 +36,36 @@ func (currentPressure *Pressure) InitializePressure(pressureValue float64) {
 }
 
 //
+func (currentPressure *Pressure) setPressureAsHectoPascal() {
+
+}
+
+//
+func (currentPressure *Pressure) setPressureAsPascal() {
+
+}
+
+//
+func (currentPressure *Pressure) setPressureAsBar() {
+
+}
+
+//
+func (currentPressure *Pressure) setPressureAsAtmosphere() {
+
+}
+
+//
+func (currentPressure *Pressure) setPressureAsTorr() {
+
+}
+
+//
+func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
+
+}
+
+//
 func (currentPressure *Pressure) getPressureValue() float64 {
 
 	return currentPressure.value
