@@ -13,7 +13,7 @@ const (
 	Torr
 )
 
-// pressure constructor with all needed parameters
+//
 func (pressureUnitScale PressureScale) String() string {
 
 	return [...]string{"hectoPascal", "pascal", "bar", "atmosphere", "torr"}[pressureUnitScale]
@@ -27,7 +27,7 @@ type Pressure struct {
 	symbolUnit string
 }
 
-//
+// pressure initializator with all needed parameters
 func (currentPressure *Pressure) InitializePressure(pressureValue float64) {
 
 	currentPressure.value = pressureValue
