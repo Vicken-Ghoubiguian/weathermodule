@@ -2,7 +2,7 @@ package main
 
 // import all necessary packages
 import (
-	weathermodule "../.."
+	weathermodule ".."
 	"fmt"
 	"flag"
 )
