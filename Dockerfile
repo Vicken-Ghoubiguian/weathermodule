@@ -19,5 +19,5 @@ ENV GOPATH /weathermodule
 #Change work directory for the samples directory of weathermodule project
 WORKDIR /weathermodule/samples/samplesFolder
 
-#Container instruction as command-line interface command: 'go run sample_${number}.go'
-CMD go run sample_${number}.go
+#Container instruction as command-line interface command: 'go run sample_${number}.go' if the sample exists...
+CMD if [ "${number}" -lt 7 ] && [ "${number}" -gt 0 ]; then go run sample_${number}.go; else echo "Error: there is no sample_${number}.go example"; fi
