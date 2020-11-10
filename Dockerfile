@@ -14,4 +14,4 @@ ENV GOPATH /weathermodule
 WORKDIR /weathermodule/samples
 
 #Container instruction as command-line interface command: 'go run $wished_sample' if the sample exists...
-CMD if [ -f "$wished_sample" ]; then go run $wished_sample; else echo "\033[31mError: there is no $wished_sample example\033[0m"; fi
+CMD if [ -f "$wished_sample" ]; then go run $wished_sample; elif [ -z "$wished_sample" ]; then echo  ""; else echo "\033[31mError: there is no $wished_sample example\033[0m"; fi
