@@ -1,4 +1,4 @@
-package usefulFunctions
+package usefullFunctions
 
 // Import all necessary packages
 import (

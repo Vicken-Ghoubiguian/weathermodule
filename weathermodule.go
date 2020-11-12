@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"encoding/json"
-	"usefulFunctions"
+	"usefullFunctions"
 	"weatherClasses"
 	"owmStructures"
 	"io/ioutil"
@@ -63,25 +63,25 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 	weatherResp, err := http.Get(weatherRequest)
 
 	//
-	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	weatherJsonString, err := ioutil.ReadAll(weatherResp.Body)
 
 	//
-	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//Single instruction to convert weather_json_string []byte variable to string
 	err = json.Unmarshal(weatherJsonString, &owm)
 
 	//
-	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	if owm.Cod != 200 {
 
-		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
-		usefulFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
+		// Calling the 'owmErrorHandlerFunction' from the 'usefullFunctions' module to treat the current error...
+		usefullFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
 
 	} else {
 
@@ -95,20 +95,20 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		uvResp, err := http.Get(uvRequest)
 
 		//
-		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+		usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		uvJsonString, err := ioutil.ReadAll(uvResp.Body)
 
 		//
-		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+		usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
-		//weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		//weather := usefullFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
 		err = json.Unmarshal(uvJsonString, &UVowm)
 
 		//
-		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+		usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		w.coords.InitializeCoordinates(owm.Coord.Lon, owm.Coord.Lat)
@@ -159,25 +159,25 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 	weatherResp, err := http.Get(weatherRequest)
 
 	//
-	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	weatherJsonString, err := ioutil.ReadAll(weatherResp.Body)
 
 	//
-	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//Single instruction to convert weather_json_string []byte variable to string
 	err = json.Unmarshal(weatherJsonString, &owm)
 
 	//
-	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	if owm.Cod != 200 {
 
-		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
-		usefulFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
+		// Calling the 'owmErrorHandlerFunction' from the 'usefullFunctions' module to treat the current error...
+		usefullFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
 
 	} else {
 
@@ -191,19 +191,19 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 		uvResp, err := http.Get(uvRequest)
 
 		//
-		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+		usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		uvJsonString, err := ioutil.ReadAll(uvResp.Body)
 
 		//
-		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+		usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		err = json.Unmarshal(uvJsonString, &UVowm)
 
 		//
-		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+		usefullFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		w.coords.InitializeCoordinates(owm.Coord.Lon, owm.Coord.Lat)
