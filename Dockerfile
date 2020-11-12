@@ -25,4 +25,4 @@ ENV moreInfos "\033[0;36mIf you want more informations about this API, If you wa
 ENV errorMessage "\033[31mError: sample not found\033[0m"
 
 #Container instruction as command-line interface command: 'go run $wished_sample' if the sample exists...
-CMD echo "${welcomeMessage}"; echo "${moreInfos}"; echo ""; if [ -f "$wished_sample" ]; then go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; elif [ -z "$wished_sample" ]; then echo  ""; else echo "${errorMessage}"; fi
+CMD echo "${welcomeMessage}"; echo "${moreInfos}"; echo ""; read -p 'What is your whished sample ? ' wished_sample; read -p 'What is your wished city ? ' wished_city; echo ""; if [ -f "$wished_sample" ]; then go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; elif [ -z "$wished_sample" ]; then echo  ""; else echo "${errorMessage}"; fi
