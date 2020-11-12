@@ -12,9 +12,6 @@ import (
 	"net/http"
 )
 
-// Importation of the github project gjson to treat received json
-//import "github.com/tidwall/gjson"
-
 // Defining the type 'Weather' which recover and manage current weather in a defined city
 type WeatherModule struct {
 
@@ -81,13 +78,7 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
-	//owmCode := gjson.Get(string(weatherJsonString), "cod")
-
-	//
 	if owm.Cod != 200 {
-
-		//
-		//owmMessage := gjson.Get(string(weatherJsonString), "message")
 
 		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
 		usefulFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
@@ -159,7 +150,7 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey string) {
 
 	//
-        var owm owmStructures.OWMStruct
+	var owm owmStructures.OWMStruct
 
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
@@ -176,20 +167,14 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 	//
 	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
-	//
-	//owmCode := gjson.Get(string(weatherJsonString), "cod")
-
 	//Single instruction to convert weather_json_string []byte variable to string
-        err = json.Unmarshal(weatherJsonString, &owm)
+	err = json.Unmarshal(weatherJsonString, &owm)
 
-        //
-        usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+	//
+	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
 	if owm.Cod != 200 {
-
-		//
-		//owmMessage := gjson.Get(string(weatherJsonString), "message")
 
 		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
 		usefulFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
@@ -197,7 +182,7 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 	} else {
 
 		//
-                var UVowm owmStructures.UVStruct
+		var UVowm owmStructures.UVStruct
 
 		//
 		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, fmt.Sprintf("%g", owm.Coord.Lat), fmt.Sprintf("%g", owm.Coord.Lon))
@@ -217,11 +202,8 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 		//
 		err = json.Unmarshal(uvJsonString, &UVowm)
 
-                //
-                usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
-
 		//
-		//weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
 		w.coords.InitializeCoordinates(owm.Coord.Lon, owm.Coord.Lat)
