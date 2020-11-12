@@ -10,6 +10,12 @@ COPY . /weathermodule
 #Edit the environment variable value GOPATH for the weathermodule directory
 ENV GOPATH /weathermodule
 
+#Define the Dockerfile argument 'userApiKey' to specify the user's api key
+ARG userApiKey
+
+#Define the environment variable 'apiOwmKey' to take the 'userApiKey' argument value and put it to run the samples
+ENV apiOwmKey=$userApiKey
+
 #Change work directory for the samples directory of weathermodule project
 WORKDIR /weathermodule/samples
 
