@@ -1,9 +1,9 @@
 package owmStructures
 
 type Sys struct {
-	Type int
-	Id int
+	Type int64
+	Id int64
 	Country string
-	Sunrise int
-	Sunset int
+	Sunrise int64
+	Sunset int64
 }

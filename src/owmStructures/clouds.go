@@ -1,5 +1,5 @@
 package owmStructures
 
 type Clouds struct {
-	All int
+	All int64
 }

@@ -5,6 +5,6 @@ type Main struct {
 	Feels_like float64
 	Temp_min float64
 	Temp_max float64
-	Pressure int
-	Humidity int
+	Pressure float64
+	Humidity int64
 }

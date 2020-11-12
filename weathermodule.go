@@ -3,14 +3,17 @@ package weathermodule
 // Import all necessary packages
 import (
 	"fmt"
+	"strconv"
+	"encoding/json"
 	"usefulFunctions"
 	"weatherClasses"
+	"owmStructures"
 	"io/ioutil"
 	"net/http"
 )
 
 // Importation of the github project gjson to treat received json
-import "github.com/tidwall/gjson"
+//import "github.com/tidwall/gjson"
 
 // Defining the type 'Weather' which recover and manage current weather in a defined city
 type WeatherModule struct {
@@ -53,6 +56,9 @@ type WeatherModule struct {
 // Defining the Weather initializer
 func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Code string, apiKey string) {
 
+	//
+	var owm owmStructures.OWMStruct
+
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city + "," + countrysISOAlpha2Code, apiKey)
 
@@ -68,22 +74,31 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 	//
 	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
-	//
-	owmCode := gjson.Get(string(weatherJsonString), "cod")
+	//Single instruction to convert weather_json_string []byte variable to string
+	err = json.Unmarshal(weatherJsonString, &owm)
 
 	//
-	if owmCode.Int() != 200 {
+	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
+
+	//
+	//owmCode := gjson.Get(string(weatherJsonString), "cod")
+
+	//
+	if owm.Cod != 200 {
 
 		//
-		owmMessage := gjson.Get(string(weatherJsonString), "message")
+		//owmMessage := gjson.Get(string(weatherJsonString), "message")
 
 		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
-		usefulFunctions.OwmErrorHandlerFunction(owmCode.String(), weatherClasses.Red(), owmMessage.String(), weatherClasses.Reset())
+		usefulFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
 
 	} else {
 
 		//
-		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, gjson.Get(string(weatherJsonString), "coord.lat").String(), gjson.Get(string(weatherJsonString), "coord.lon").String())
+		var UVowm owmStructures.UVStruct
+
+		//
+		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, fmt.Sprintf("%g", owm.Coord.Lat), fmt.Sprintf("%g", owm.Coord.Lon))
 
 		//
 		uvResp, err := http.Get(uvRequest)
@@ -98,38 +113,42 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
-		weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		//weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		err = json.Unmarshal(uvJsonString, &UVowm)
 
 		//
-		w.coords.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
+		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
-		w.weather.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
+		w.coords.InitializeCoordinates(owm.Coord.Lon, owm.Coord.Lat)
 
 		//
-		w.temperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
-		w.feelingLikeTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
-		w.minTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
-		w.maxTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
+		w.weather.InitializeWeather(owm.Weather[0].Id, owm.Weather[0].Main, owm.Weather[0].Description, owm.Weather[0].Icon)
 
 		//
-		w.wind.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
+		w.temperature.InitializeTemperature(owm.Main.Temp)
+		w.feelingLikeTemperature.InitializeTemperature(owm.Main.Feels_like)
+		w.minTemperature.InitializeTemperature(owm.Main.Temp_min)
+		w.maxTemperature.InitializeTemperature(owm.Main.Temp_max)
 
 		//
-		w.pressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+		w.wind.InitializeWind(owm.Wind.Speed, owm.Wind.Deg, owm.Wind.Gust)
 
 		//
-		w.humidity.InitializeHumidity(gjson.Get(string(weatherJsonString), "main.humidity").Int())
+		w.pressure.InitializePressure(owm.Main.Pressure)
 
 		//
-		w.geographicLocation.InitializeGeographicLocation(gjson.Get(string(weatherJsonString), "sys.country").String(), gjson.Get(string(weatherJsonString), "name").String())
+		w.humidity.InitializeHumidity(owm.Main.Humidity)
 
 		//
-		w.sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
-		w.sunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
+		w.geographicLocation.InitializeGeographicLocation(owm.Sys.Country, owm.Name)
 
 		//
-		w.ultraViolet.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
+		w.sunrise.InitializeSunTime(owm.Sys.Sunrise)
+		w.sunset.InitializeSunTime(owm.Sys.Sunset)
+
+		//
+		w.ultraViolet.InitializeUV(int64(UVowm.Value))
 
 		// Displaying success message...
 		fmt.Println(weatherClasses.Green() + "Weather implemented successfully !" + weatherClasses.Reset() + "\n")
@@ -138,6 +157,9 @@ func (w *WeatherModule) InitializeWeatherModule(city string, countrysISOAlpha2Co
 
 // Defining the minimal Weather initializer
 func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey string) {
+
+	//
+        var owm owmStructures.OWMStruct
 
 	// Defining the HTTP request's URL for weather and uv
 	weatherRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", city, apiKey)
@@ -155,21 +177,30 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 	usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
-	owmCode := gjson.Get(string(weatherJsonString), "cod")
+	//owmCode := gjson.Get(string(weatherJsonString), "cod")
+
+	//Single instruction to convert weather_json_string []byte variable to string
+        err = json.Unmarshal(weatherJsonString, &owm)
+
+        //
+        usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 	//
-	if owmCode.Int() != 200 {
+	if owm.Cod != 200 {
 
 		//
-		owmMessage := gjson.Get(string(weatherJsonString), "message")
+		//owmMessage := gjson.Get(string(weatherJsonString), "message")
 
 		// Calling the 'owmErrorHandlerFunction' from the 'usefulFunctions' module to treat the current error...
-		usefulFunctions.OwmErrorHandlerFunction(owmCode.String(), weatherClasses.Red(), owmMessage.String(), weatherClasses.Reset())
+		usefulFunctions.OwmErrorHandlerFunction(strconv.Itoa(int(owm.Cod)), weatherClasses.Red(), owm.Message, weatherClasses.Reset())
 
 	} else {
 
 		//
-		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, gjson.Get(string(weatherJsonString), "coord.lat").String(), gjson.Get(string(weatherJsonString), "coord.lon").String())
+                var UVowm owmStructures.UVStruct
+
+		//
+		uvRequest := fmt.Sprintf("https://api.openweathermap.org/data/2.5/uvi?appid=%s&lat=%s&lon=%s", apiKey, fmt.Sprintf("%g", owm.Coord.Lat), fmt.Sprintf("%g", owm.Coord.Lon))
 
 		//
 		uvResp, err := http.Get(uvRequest)
@@ -184,38 +215,44 @@ func (w *WeatherModule) InitializeMinimallyWeatherModule(city string, apiKey str
 		usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
-		weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
+		err = json.Unmarshal(uvJsonString, &UVowm)
+
+                //
+                usefulFunctions.OtherErrorHandlerFunction(err, weatherClasses.Red(), weatherClasses.Reset())
 
 		//
-		w.coords.InitializeCoordinates(gjson.Get(string(weatherJsonString), "coord.lon").Float(), gjson.Get(string(weatherJsonString), "coord.lat").Float())
+		//weather := usefulFunctions.ExtractWeatherFromJSONFunction(gjson.Get(string(weatherJsonString), "weather").String())
 
 		//
-		w.weather.InitializeWeather(gjson.Get(weather, "id").Int(), gjson.Get(weather, "main").String(), gjson.Get(weather, "description").String(), gjson.Get(weather, "icon").String())
+		w.coords.InitializeCoordinates(owm.Coord.Lon, owm.Coord.Lat)
 
 		//
-		w.temperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp").Float())
-		w.feelingLikeTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.feels_like").Float())
-		w.minTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_min").Float())
-		w.maxTemperature.InitializeTemperature(gjson.Get(string(weatherJsonString), "main.temp_max").Float())
+		w.weather.InitializeWeather(owm.Weather[0].Id, owm.Weather[0].Main, owm.Weather[0].Description, owm.Weather[0].Icon)
 
 		//
-		w.wind.InitializeWind(gjson.Get(string(weatherJsonString), "wind.speed").Float(), gjson.Get(string(weatherJsonString), "wind.deg").Int(), gjson.Get(string(weatherJsonString), "wind.gust").Float())
+		w.temperature.InitializeTemperature(owm.Main.Temp)
+		w.feelingLikeTemperature.InitializeTemperature(owm.Main.Feels_like)
+		w.minTemperature.InitializeTemperature(owm.Main.Temp_min)
+		w.maxTemperature.InitializeTemperature(owm.Main.Temp_max)
 
 		//
-		w.pressure.InitializePressure(gjson.Get(string(weatherJsonString), "main.pressure").Float())
+		w.wind.InitializeWind(owm.Wind.Speed, owm.Wind.Deg, owm.Wind.Gust)
 
 		//
-		w.humidity.InitializeHumidity(gjson.Get(string(weatherJsonString), "main.humidity").Int())
+		w.pressure.InitializePressure(owm.Main.Pressure)
 
 		//
-		w.geographicLocation.InitializeGeographicLocation(gjson.Get(string(weatherJsonString), "sys.country").String(), gjson.Get(string(weatherJsonString), "name").String())
+		w.humidity.InitializeHumidity(owm.Main.Humidity)
 
 		//
-		w.sunrise.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunrise").Int())
-		w.sunset.InitializeSunTime(gjson.Get(string(weatherJsonString), "sys.sunset").Int())
+		w.geographicLocation.InitializeGeographicLocation(owm.Sys.Country, owm.Name)
 
 		//
-		w.ultraViolet.InitializeUV(gjson.Get(string(uvJsonString), "value").Int())
+		w.sunrise.InitializeSunTime(owm.Sys.Sunrise)
+		w.sunset.InitializeSunTime(owm.Sys.Sunset)
+
+		//
+		w.ultraViolet.InitializeUV(int64(UVowm.Value))
 
 		// Displaying success message...
 		fmt.Println(weatherClasses.Green() + "Weather implemented successfully !" + weatherClasses.Reset() + "\n")

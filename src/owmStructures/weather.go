@@ -1,7 +1,7 @@
 package owmStructures
 
 type Weather struct {
-	Id int
+	Id int64
 	Main string
 	Description string
 	Icon string

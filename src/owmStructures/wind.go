@@ -2,5 +2,6 @@ package owmStructures
 
 type Wind struct {
 	Speed float64
-	Deg int
+	Deg int64
+	Gust float64
 }
