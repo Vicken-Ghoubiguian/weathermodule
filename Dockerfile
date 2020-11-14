@@ -29,18 +29,24 @@ CMD echo "${welcomeMessage}"; \
     echo "${moreInfos}"; \
     echo ""; \
     read -p 'What is your whished sample ? ' wished_sample; \
-    read -p 'What is your wished city ? ' wished_city; echo ""; \
+    read -p 'What is your wished city ? ' wished_city; \
     if [ -f "$wished_sample" ]; then \
 	if [ $wished_sample = "sample_5.go" ]; then \
 		read -p 'What is your whished country ? ' wished_country; \
 		read -p 'What is your whished temperature scale ? ' whished_temp_scale; \
+		echo ""; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country" --temperatureScale="$whished_temp_scale"; \
 	elif [ $wished_sample = "sample_4.go" ]; then \
 		read -p 'What is your whished country ? ' wished_country; \
+		echo  ""; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country"; \
 	else \
+		echo  ""; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; \
 	fi \
     elif [ -z "$wished_sample" ]; then \
 	echo  ""; \
-    else echo "${errorMessage}"; fi
+    else \
+	echo ""; \
+	echo "${errorMessage}"; \
+    fi
