@@ -21,30 +21,33 @@ WORKDIR /weathermodule/samples
 
 #Edit environment variables to contain messages to display
 ENV welcomeMessage "\033[0;36mWelcome to the Docker tester of the weathermodule API examples...\033[0m"
+ENV presentationSamples "\033[0;36mAll available samples: sample_1.go, sample_2.go, sample_3.go, sample_4.go and sample_5.go\033[0m"
 ENV moreInfos "\033[0;36mIf you want more informations about this API, If you want more informations about these api, you can check the project github repo at https://github.com/Vicken-Ghoubiguian/weathermodule.\033[0m"
 ENV errorMessage "\033[31mError: sample not found\033[0m"
 
 #Container instruction as command-line interface command: 'go run $wished_sample' if the sample exists...
 CMD echo "${welcomeMessage}"; \
+    echo "${presentationSamples}"; \
     echo "${moreInfos}"; \
-    echo ""; \
+    echo "\e[94m"; \
     read -p 'What is your whished sample ? ' wished_sample; \
     read -p 'What is your wished city ? ' wished_city; \
     if [ -f "$wished_sample" ]; then \
 	if [ $wished_sample = "sample_5.go" ]; then \
 		read -p 'What is your whished country ? ' wished_country; \
 		read -p 'What is your whished temperature scale ? ' whished_temp_scale; \
-		echo ""; \
+		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country" --temperatureScale="$whished_temp_scale"; \
 	elif [ $wished_sample = "sample_4.go" ]; then \
 		read -p 'What is your whished country ? ' wished_country; \
-		echo  ""; \
+		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country"; \
 	else \
-		echo  ""; \
+		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; \
 	fi \
     elif [ -z "$wished_sample" ]; then \
+	echo "\033[0m"; \
 	echo  ""; \
     else \
 	echo ""; \
