@@ -31,7 +31,16 @@ CMD echo "${welcomeMessage}"; \
     read -p 'What is your whished sample ? ' wished_sample; \
     read -p 'What is your wished city ? ' wished_city; echo ""; \
     if [ -f "$wished_sample" ]; then \
-	go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; \
+	if [ $wished_sample = "sample_5.go" ]; then \
+		read -p 'What is your whished country ? ' wished_country; \
+		read -p 'What is your whished temperature scale ? ' whished_temp_scale; \
+		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country" --temperatureScale="$whished_temp_scale"; \
+	elif [ $wished_sample = "sample_4.go" ]; then \
+		read -p 'What is your whished country ? ' wished_country; \
+		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country"; \
+	else \
+		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; \
+	fi \
     elif [ -z "$wished_sample" ]; then \
 	echo  ""; \
     else echo "${errorMessage}"; fi
