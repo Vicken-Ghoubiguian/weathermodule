@@ -28,7 +28,7 @@ func (timeFormat sunTimeFormat) String() string {
 //
 func timePresentationFunction(examinedInt int) string {
 
-	if examinedInt < 0 {
+	if examinedInt < 10 {
 	
 		return "0" + strconv.Itoa(examinedInt)
 		
