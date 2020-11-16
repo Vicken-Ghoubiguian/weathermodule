@@ -84,9 +84,16 @@ func (currentSunTime *SunTime) GetSunTimeAsTimestamp() int64 {
 //
 func (currentSunTime *SunTime) SetCurrentDateSeparator(newSeparator string) {
 
-	currentSunTime.currentDateSeparator = newSeparator
+	if currentSunTime.currentDateSeparator != newSeparator {
 	
-	fmt.Printf(Green() + "date separator updated successfully." + Reset() + "\n")
+		currentSunTime.currentDateSeparator = newSeparator
+		fmt.Printf(Green() + "Date separator updated successfully." + Reset() + "\n")
+		
+	} else {
+	
+		fmt.Printf(Red() + "Date separator already as " + newSeparator + "." + Reset() + "\n")
+	
+	}
 }
 
 //
