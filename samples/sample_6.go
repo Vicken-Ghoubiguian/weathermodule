@@ -16,7 +16,8 @@ func main() {
 	//
 	city := flag.String("city", "", "The city whose you want weather")
 	apiKey := flag.String("apiKey", "", "The OpenWeatherMap API key")
-	timeFormat := flag.String("timeFormat", "", "The datetime format to displat sunrise and sunset time")
+	timeFormat := flag.String("timeFormat", "", "The datetime format to display sunrise and sunset time")
+	dateSeparator := flag.String("dateSeparator", "", "The dateSeparator to display sunrise and sunset time")
 
 	flag.Parse()
 
@@ -46,6 +47,9 @@ func main() {
 	fmt.Printf("Wind speed: " + fmt.Sprintf("%f", weatherObj.GetWind().GetSpeed()) + "\n")
 	fmt.Printf("Wind Deg: " + fmt.Sprintf("%d", weatherObj.GetWind().GetDeg()) + "\n")
 	fmt.Printf("Wind Gust: " + fmt.Sprintf("%f", weatherObj.GetWind().GetGust()) + "\n")
+	
+	weatherObj.GetSunrise().SetCurrentDateSeparator(*dateSeparator)
+	weatherObj.GetSunset().SetCurrentDateSeparator(*dateSeparator)
 	
 	if *timeFormat == "DMYHMS" {
 	
