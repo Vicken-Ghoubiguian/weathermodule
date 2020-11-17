@@ -11,12 +11,13 @@ const (
 	Bar
 	Atmosphere
 	Torr
+	PoundsPerSquareInch
 )
 
 //
 func (pressureUnitScale PressureScale) String() string {
 
-	return [...]string{"hectoPascal", "pascal", "bar", "atmosphere", "torr"}[pressureUnitScale]
+	return [...]string{"hectoPascal", "pascal", "bar", "atmosphere", "torr", "poundsPerSquareInch"}[pressureUnitScale]
 }
 
 //
