@@ -42,6 +42,11 @@ CMD echo "${welcomeMessage}"; \
 		read -p 'What is your whished country ? ' wished_country; \
 		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --countryCode="$wished_country"; \
+	elif [ $wished_sample = "sample_6.go" ]; then \
+		read -p 'What is your whished time format ? ' wished_time_format; \
+		read -p 'What is your whished separator ? ' wished_separator; \
+		echo "\033[0m"; \
+		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --timeFormat="$wished_time_format" --dateSeparator="$wished_separator"; \
 	else \
 		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}"; \
