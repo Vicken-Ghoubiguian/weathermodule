@@ -28,6 +28,8 @@ func main() {
 
 	fmt.Printf("(" + fmt.Sprintf("%f", weatherObj.GetCoords().GetLongitude()) + ", " + fmt.Sprintf("%f", weatherObj.GetCoords().GetLatitude()) + ")\n")
 
+	fmt.Printf("\n")
+
 	fmt.Printf("Temperature (in " + weatherObj.GetTemperature().GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetTemperature().GetTemperatureValue()) + weatherObj.GetTemperature().GetTemperatureScaleSymbol() + "\n")
 
 	weatherObj.GetTemperature().SetTemperatureAsCelsius()
@@ -39,8 +41,32 @@ func main() {
 	weatherObj.GetTemperature().SetTemperatureAsKelvin()
 	fmt.Printf("Temperature (in " + weatherObj.GetTemperature().GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetTemperature().GetTemperatureValue()) + weatherObj.GetTemperature().GetTemperatureScaleSymbol() + "\n")
 
+	fmt.Printf("\n")
+
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + " " + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	weatherObj.GetPressure().SetPressureAsPascal()
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	weatherObj.GetPressure().SetPressureAsBar()
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	weatherObj.GetPressure().SetPressureAsAtmosphere()
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	weatherObj.GetPressure().SetPressureAsTorr()
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	weatherObj.GetPressure().SetPressureAsPoundsPerSquareInch()
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	weatherObj.GetPressure().SetPressureAsHectoPascal()
+	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
+
+	fmt.Printf("\n")
+
 	fmt.Printf("UV index: " + fmt.Sprintf("%d", weatherObj.GetUltraViolet().GetIndex()) + ", UV risk: " + weatherObj.GetUltraViolet().GetRisk().String() + "\n")
-	
+
 	fmt.Printf("Humidity: " + fmt.Sprintf("%d", weatherObj.GetHumidity().GetHumidityValue()) + " " + weatherObj.GetHumidity().GetHumidityUnitScale() + "\n")
 
 	fmt.Printf("Wind speed: " + fmt.Sprintf("%f", weatherObj.GetWind().GetSpeed()) + "\n")
