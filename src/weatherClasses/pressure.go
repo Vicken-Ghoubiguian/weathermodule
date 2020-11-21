@@ -42,7 +42,7 @@ func (currentPressure *Pressure) InitializePressure(pressureValue float64) {
 }
 
 // set pressure to HectoPascal (hPa)
-func (currentPressure *Pressure) setPressureAsHectoPascal() {
+func (currentPressure *Pressure) SetPressureAsHectoPascal() {
 
 	if currentPressure.scaleUnit == Pascal {
 
@@ -92,7 +92,7 @@ func (currentPressure *Pressure) setPressureAsHectoPascal() {
 }
 
 // set pressure to Pascal (Pa)
-func (currentPressure *Pressure) setPressureAsPascal() {
+func (currentPressure *Pressure) SetPressureAsPascal() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
@@ -142,7 +142,7 @@ func (currentPressure *Pressure) setPressureAsPascal() {
 }
 
 // set pressure to Bar
-func (currentPressure *Pressure) setPressureAsBar() {
+func (currentPressure *Pressure) SetPressureAsBar() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
@@ -192,7 +192,7 @@ func (currentPressure *Pressure) setPressureAsBar() {
 }
 
 // set pressure to Atmosphere
-func (currentPressure *Pressure) setPressureAsAtmosphere() {
+func (currentPressure *Pressure) SetPressureAsAtmosphere() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
@@ -242,7 +242,7 @@ func (currentPressure *Pressure) setPressureAsAtmosphere() {
 }
 
 // set pressure to Torr
-func (currentPressure *Pressure) setPressureAsTorr() {
+func (currentPressure *Pressure) SetPressureAsTorr() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
@@ -292,7 +292,7 @@ func (currentPressure *Pressure) setPressureAsTorr() {
 }
 
 // set pressure to Pounds per square inch (psi)
-func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
+func (currentPressure *Pressure) SetPressureAsPoundsPerSquareInch() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
@@ -342,19 +342,19 @@ func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
 }
 
 // 'value' attribute getter
-func (currentPressure *Pressure) getPressureValue() float64 {
+func (currentPressure *Pressure) GetPressureValue() float64 {
 
 	return currentPressure.value
 }
 
 // 'scaleUnit' attribute getter
-func (currentPressure *Pressure) getPressureScale() PressureScale {
+func (currentPressure *Pressure) GetPressureScale() PressureScale {
 
 	return currentPressure.scaleUnit
 }
 
 // 'symbolUnit' attribute getter
-func (currentPressure *Pressure) getPressureSymbolUnit() string {
+func (currentPressure *Pressure) GetPressureSymbolUnit() string {
 
 	return currentPressure.symbolUnit
 }
