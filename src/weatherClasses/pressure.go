@@ -46,6 +46,7 @@ func (currentPressure *Pressure) setPressureAsHectoPascal() {
 
 	if currentPressure.scaleUnit == Pascal {
 
+		currentPressure.value = currentPressure.value / 100
 		currentPressure.scaleUnit = HectoPascal
 		currentPressure.symbolUnit = " hPa"
 
@@ -53,6 +54,7 @@ func (currentPressure *Pressure) setPressureAsHectoPascal() {
 
 	} else if currentPressure.scaleUnit == Bar {
 
+		currentPressure.value = currentPressure.value * 1000
 		currentPressure.scaleUnit = HectoPascal
 		currentPressure.symbolUnit = " hPa"
 
@@ -60,6 +62,7 @@ func (currentPressure *Pressure) setPressureAsHectoPascal() {
 
 	} else if currentPressure.scaleUnit == Atmosphere {
 
+		currentPressure.value = currentPressure.value * 1013.2501
 		currentPressure.scaleUnit = HectoPascal
 		currentPressure.symbolUnit = " hPa"
 
@@ -67,6 +70,7 @@ func (currentPressure *Pressure) setPressureAsHectoPascal() {
 
 	} else if currentPressure.scaleUnit == Torr {
 
+		currentPressure.value = currentPressure.value * 1.333223684211
 		currentPressure.scaleUnit = HectoPascal
 		currentPressure.symbolUnit = " hPa"
 
@@ -74,6 +78,7 @@ func (currentPressure *Pressure) setPressureAsHectoPascal() {
 
 	} else if currentPressure.scaleUnit == PoundsPerSquareInch {
 
+		currentPressure.value = currentPressure.value * 68.9475729318
 		currentPressure.scaleUnit = HectoPascal
 		currentPressure.symbolUnit = " hPa"
 
@@ -91,6 +96,7 @@ func (currentPressure *Pressure) setPressureAsPascal() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
+		currentPressure.value = currentPressure.value * 100
                 currentPressure.scaleUnit = Pascal
                 currentPressure.symbolUnit = " Pa"
 
@@ -98,6 +104,7 @@ func (currentPressure *Pressure) setPressureAsPascal() {
 
         } else if currentPressure.scaleUnit == Bar {
 
+		currentPressure.value = currentPressure.value * 100000
                 currentPressure.scaleUnit = Pascal
                 currentPressure.symbolUnit = " Pa"
 
@@ -105,6 +112,7 @@ func (currentPressure *Pressure) setPressureAsPascal() {
 
         } else if currentPressure.scaleUnit == Atmosphere {
 
+		currentPressure.value = currentPressure.value * 101325
                 currentPressure.scaleUnit = Pascal
                 currentPressure.symbolUnit = " Pa"
 
@@ -112,6 +120,7 @@ func (currentPressure *Pressure) setPressureAsPascal() {
 
         } else if currentPressure.scaleUnit == Torr {
 
+		currentPressure.value = currentPressure.value * 133.3223684211
                 currentPressure.scaleUnit = Pascal
                 currentPressure.symbolUnit = " Pa"
 
@@ -119,6 +128,7 @@ func (currentPressure *Pressure) setPressureAsPascal() {
 
         } else if currentPressure.scaleUnit == PoundsPerSquareInch {
 
+		currentPressure.value = currentPressure.value * 6894.7572931783
                 currentPressure.scaleUnit = Pascal
                 currentPressure.symbolUnit = " Pa"
 
@@ -136,6 +146,7 @@ func (currentPressure *Pressure) setPressureAsBar() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
+		currentPressure.value = currentPressure.value / 1000
                 currentPressure.scaleUnit = Bar
                 currentPressure.symbolUnit = " bar"
 
@@ -143,6 +154,7 @@ func (currentPressure *Pressure) setPressureAsBar() {
 
         } else if currentPressure.scaleUnit == Pascal {
 
+		currentPressure.value = currentPressure.value / 100000
                 currentPressure.scaleUnit = Bar
                 currentPressure.symbolUnit = " bar"
 
@@ -150,6 +162,7 @@ func (currentPressure *Pressure) setPressureAsBar() {
 
         } else if currentPressure.scaleUnit == Atmosphere {
 
+		currentPressure.value = currentPressure.value * 1.01325
                 currentPressure.scaleUnit = Bar
                 currentPressure.symbolUnit = " bar"
 
@@ -157,6 +170,7 @@ func (currentPressure *Pressure) setPressureAsBar() {
 
         } else if currentPressure.scaleUnit == Torr {
 
+		currentPressure.value = currentPressure.value / 750.06375541921
                 currentPressure.scaleUnit = Bar
                 currentPressure.symbolUnit = " bar"
 
@@ -164,6 +178,7 @@ func (currentPressure *Pressure) setPressureAsBar() {
 
         } else if currentPressure.scaleUnit == PoundsPerSquareInch {
 
+		currentPressure.value = currentPressure.value / 14.5037738
                 currentPressure.scaleUnit = Bar
                 currentPressure.symbolUnit = " bar"
 
@@ -181,6 +196,7 @@ func (currentPressure *Pressure) setPressureAsAtmosphere() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
+		currentPressure.value = currentPressure.value / 1013.25
                 currentPressure.scaleUnit = Atmosphere
                 currentPressure.symbolUnit = " atm"
 
@@ -188,6 +204,7 @@ func (currentPressure *Pressure) setPressureAsAtmosphere() {
 
         } else if currentPressure.scaleUnit == Pascal {
 
+		currentPressure.value = currentPressure.value / 101325
                 currentPressure.scaleUnit = Atmosphere
                 currentPressure.symbolUnit = " atm"
 
@@ -195,6 +212,7 @@ func (currentPressure *Pressure) setPressureAsAtmosphere() {
 
         } else if currentPressure.scaleUnit == Bar {
 
+		currentPressure.value = currentPressure.value / 1.01325
                 currentPressure.scaleUnit = Atmosphere
                 currentPressure.symbolUnit = " atm"
 
@@ -202,6 +220,7 @@ func (currentPressure *Pressure) setPressureAsAtmosphere() {
 
         } else if currentPressure.scaleUnit == Torr {
 
+		currentPressure.value = currentPressure.value / 760
                 currentPressure.scaleUnit = Atmosphere
                 currentPressure.symbolUnit = " atm"
 
@@ -209,6 +228,7 @@ func (currentPressure *Pressure) setPressureAsAtmosphere() {
 
         } else if currentPressure.scaleUnit == PoundsPerSquareInch {
 
+		currentPressure.value = currentPressure.value / 14.696
                 currentPressure.scaleUnit = Atmosphere
                 currentPressure.symbolUnit = " atm"
 
@@ -226,6 +246,7 @@ func (currentPressure *Pressure) setPressureAsTorr() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
+		currentPressure.value = currentPressure.value / 1.3332236842
                 currentPressure.scaleUnit = Torr
                 currentPressure.symbolUnit = " torr"
 
@@ -233,6 +254,7 @@ func (currentPressure *Pressure) setPressureAsTorr() {
 
         } else if currentPressure.scaleUnit == Bar {
 
+		currentPressure.value = currentPressure.value * 750.061682704
                 currentPressure.scaleUnit = Torr
                 currentPressure.symbolUnit = " torr"
 
@@ -240,6 +262,7 @@ func (currentPressure *Pressure) setPressureAsTorr() {
 
         } else if currentPressure.scaleUnit == Atmosphere {
 
+		currentPressure.value = currentPressure.value * 760
                 currentPressure.scaleUnit = Torr
                 currentPressure.symbolUnit = " torr"
 
@@ -247,6 +270,7 @@ func (currentPressure *Pressure) setPressureAsTorr() {
 
         } else if currentPressure.scaleUnit == Pascal {
 
+		currentPressure.value = currentPressure.value / 133.3223684211
                 currentPressure.scaleUnit = Torr
                 currentPressure.symbolUnit = " torr"
 
@@ -254,6 +278,7 @@ func (currentPressure *Pressure) setPressureAsTorr() {
 
         } else if currentPressure.scaleUnit == PoundsPerSquareInch {
 
+		currentPressure.value = currentPressure.value * 51.715
                 currentPressure.scaleUnit = Torr
                 currentPressure.symbolUnit = " torr"
 
@@ -271,6 +296,7 @@ func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
 
 	if currentPressure.scaleUnit == HectoPascal {
 
+		currentPressure.value = currentPressure.value / 68.94757293168
                 currentPressure.scaleUnit = PoundsPerSquareInch
                 currentPressure.symbolUnit = " psi"
 
@@ -278,6 +304,7 @@ func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
 
         } else if currentPressure.scaleUnit == Bar {
 
+		currentPressure.value = currentPressure.value * 14.503773773022
                 currentPressure.scaleUnit = PoundsPerSquareInch
                 currentPressure.symbolUnit = " psi"
 
@@ -285,6 +312,7 @@ func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
 
         } else if currentPressure.scaleUnit == Atmosphere {
 
+		currentPressure.value = currentPressure.value * 14.695964
                 currentPressure.scaleUnit = PoundsPerSquareInch
                 currentPressure.symbolUnit = " psi"
 
@@ -292,6 +320,7 @@ func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
 
         } else if currentPressure.scaleUnit == Pascal {
 
+		currentPressure.value = currentPressure.value / 6894.757293168
                 currentPressure.scaleUnit = PoundsPerSquareInch
                 currentPressure.symbolUnit = " psi"
 
@@ -299,6 +328,7 @@ func (currentPressure *Pressure) setPressureAsPoundsPerSquareInch() {
 
         } else if currentPressure.scaleUnit == Torr {
 
+		currentPressure.value = currentPressure.value / 51.715
                 currentPressure.scaleUnit = PoundsPerSquareInch
                 currentPressure.symbolUnit = " psi"
 
