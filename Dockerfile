@@ -48,7 +48,7 @@ CMD echo "${welcomeMessage}"; \
 		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --timeFormat="$wished_time_format" --dateSeparator="$wished_separator"; \
 	elif [ $wished_sample = "sample_7.go" ]; then \
-		read -p 'What is your whished pressure scale ("HectoPascal", "Pascal", "Bar", "Atmosphere", "Torr" or "PoundsPerSquareInch") ? ' whished_press_scale; \
+		read -p 'What is your whished pressure scale ("HectoPascal", "Pascal", "Bar", "Atmosphere", "Torr" or "PoundsPerSquareInch") ? ' wished_press_scale; \
 		echo "\033[0m"; \
 		go run $wished_sample --city="$wished_city" --apiKey="${api_owm_key}" --pressureScale="$wished_press_scale"; \
 	else \
