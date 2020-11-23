@@ -44,7 +44,7 @@ func main() {
 	fmt.Printf("\n")
 	
 	//
-	pressureScaleValue = *pressureScale
+	pressureScaleValue := *pressureScale
 	
 	if pressureScaleValue == "HectoPascal" || pressureScaleValue == "Pascal" || pressureScaleValue == "Bar" || pressureScaleValue == "Atmosphere" || pressureScaleValue == "Torr" || pressureScaleValue == "PoundsPerSquareInch"{
 	
