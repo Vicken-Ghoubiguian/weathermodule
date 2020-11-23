@@ -16,6 +16,7 @@ func main() {
 	//
 	city := flag.String("city", "", "The city whose you want weather")
 	apiKey := flag.String("apiKey", "", "The OpenWeatherMap API key")
+	pressureScale := flag.String("pressureScale", "", "The choosen pressure scale")
 
 	flag.Parse()
 
@@ -41,26 +42,39 @@ func main() {
 	fmt.Printf("Temperature (in " + weatherObj.GetTemperature().GetCurrentTemperatureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetTemperature().GetTemperatureValue()) + weatherObj.GetTemperature().GetTemperatureScaleSymbol() + "\n")
 	
 	fmt.Printf("\n")
+	
+	//
+	pressureScaleValue = *pressureScale
+	
+	if pressureScaleValue == "HectoPascal" || pressureScaleValue == "Pascal" || pressureScaleValue == "Bar" || pressureScaleValue == "Atmosphere" || pressureScaleValue == "Torr" || pressureScaleValue == "PoundsPerSquareInch"{
+	
+		if pressureScaleValue == "Pascal" {
+		
+			weatherObj.GetPressure().SetPressureAsPascal()
+		
+		} else if pressureScaleValue == "Bar" {
+		
+			weatherObj.GetPressure().SetPressureAsBar()
+			
+		} else if pressureScaleValue == "Atmosphere" {
+		
+			weatherObj.GetPressure().SetPressureAsAtmosphere()
+		
+		} else if pressureScaleValue == "Torr" {
+		
+			weatherObj.GetPressure().SetPressureAsTorr()
+		
+		} else if pressureScaleValue == "PoundsPerSquareInch" {
+		
+			weatherObj.GetPressure().SetPressureAsPoundsPerSquareInch()
+		
+		} else {
+		
+			weatherObj.GetPressure().SetPressureAsHectoPascal()
+		}
+	}
 
 	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + " " + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
-
-	weatherObj.GetPressure().SetPressureAsPascal()
-	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
-
-	weatherObj.GetPressure().SetPressureAsBar()
-	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
-
-	weatherObj.GetPressure().SetPressureAsAtmosphere()
-	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
-
-	weatherObj.GetPressure().SetPressureAsTorr()
-	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
-
-	weatherObj.GetPressure().SetPressureAsPoundsPerSquareInch()
-	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
-
-	weatherObj.GetPressure().SetPressureAsHectoPascal()
-	fmt.Printf("Pressure (in " + weatherObj.GetPressure().GetPressureScale().String() + "): " + fmt.Sprintf("%f", weatherObj.GetPressure().GetPressureValue()) + weatherObj.GetPressure().GetPressureSymbolUnit() + "\n")
 
 	fmt.Printf("\n")
 
