@@ -68,9 +68,13 @@ func main() {
 		
 			weatherObj.GetPressure().SetPressureAsPoundsPerSquareInch()
 		
-		} else {
+		} else if pressureScaleValue == "HectoPascal" {
 		
 			weatherObj.GetPressure().SetPressureAsHectoPascal()
+
+		} else {
+
+			fmt.Printf("\n" + "\033[31m" + "Error: the pressure scale you entered does not exist..." + "\033[0m" + "\n\n")
 		}
 	}
 
