@@ -44,9 +44,6 @@ type WeatherModule struct {
 	geographicLocation weatherClasses.GeographicLocation
 
 	//
-	currentLanguage weatherClasses.Language
-
-	//
 	ultraViolet weatherClasses.UV
 }
 
@@ -311,12 +308,6 @@ func (w *WeatherModule) GetSunset() *weatherClasses.SunTime {
 func (w *WeatherModule) GetGeographicLocation() *weatherClasses.GeographicLocation {
 
 	return &w.geographicLocation
-}
-
-//
-func (w *WeatherModule) GetLanguage() *weatherClasses.Language {
-
-	return &w.currentLanguage
 }
 
 //

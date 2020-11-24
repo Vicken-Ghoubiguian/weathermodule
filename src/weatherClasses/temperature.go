@@ -78,7 +78,7 @@ func (temp *Temperature) SetTemperatureAsKelvin() {
 
 	} else {
 
-		fmt.Printf(Red() + "Temperature already in Kelvin (K)" + Reset() + ".\n")
+		fmt.Printf(Red() + "Temperature already in Kelvin (K)." + Reset() + "\n")
 
 	}
 }
