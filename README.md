@@ -1,3 +1,3 @@
 # weatherModule
 
-A project to develop a Golang project to manipulate weather inside a newly developed type.
+This is an API written in Go using OpenWeatherMap to get and manipulate current weather datas from a wished city in a wished country.
