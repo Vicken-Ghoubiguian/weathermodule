@@ -8,7 +8,7 @@ This is an API written in Go using OpenWeatherMap to get and manipulate current 
 
 2. [How to use it ?](#how_to_use_it)
 
-3. [A little example](a_little_example)
+3. [A little example](#a_little_example)
 
 4. [Running with Docker](#running_with_docker)
 
