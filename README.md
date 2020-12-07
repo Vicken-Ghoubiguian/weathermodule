@@ -12,6 +12,10 @@ This is an API written in Go using OpenWeatherMap to get and manipulate current 
 
 4. [Running with Docker](#running_with_docker)
 
+	* [Pull image from DockerHub](#pull_image_from_dockerhub)
+
+	* [Build image from the Dockerfile](#build_image_from_dockerfile)
+
 5. [A few usefull links](#a_few_usefull_links)
 
 6. [Conclusion](#conclusion)
@@ -27,6 +31,12 @@ This is an API written in Go using OpenWeatherMap to get and manipulate current 
 
 <a name="running_with_docker"></a>
 ## Running with Docker
+
+<a name="pull_image_from_dockerhub"></a>
+### Pull image from DockerHub
+
+<a name="build_image_from_dockerfile"></a>
+### Build image from the Dockerfile
 
 <a name="a_few_usefull_links"></a>
 ## A few usefull links
