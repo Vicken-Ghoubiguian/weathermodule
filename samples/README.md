@@ -20,21 +20,42 @@ This directory contains all examples to present it and to illustrate how use the
 
 <a name="sample_1"></a>
 ## sample_1.go
+### Presentation
+
+### Illustration
 
 <a name="sample_2"></a>
 ## sample_2.go
+### Presentation
+
+### Illustration
 
 <a name="sample_3"></a>
 ## sample_3.go
+### Presentation
+
+### Illustration
 
 <a name="sample_4"></a>
 ## sample_4.go
+### Presentation
+
+### Illustration
 
 <a name="sample_5"></a>
 ## sample_5.go
+### Presentation
+
+### Illustration
 
 <a name="sample_6"></a>
 ## sample_6.go
+### Presentation
+
+### Illustration
 
 <a name="sample_7"></a>
 ## sample_7.go
+### Presentation
+
+### Illustration
