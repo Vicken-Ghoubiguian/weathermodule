@@ -46,3 +46,5 @@ This repository is composed of one Go file named *weathermodule.go* which contai
 
 <a name="conclusion"></a>
 ## Conclusion
+
+It has been an exciting project, easily usable by anyone in any other project written in Go language regardless of its size (large or small) and which has broadened my knowledge in Go language development as potentially every other beginner or confirmed developer
