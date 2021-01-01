@@ -38,7 +38,11 @@ This repository is composed of one Go file named *weathermodule.go* which contai
 You can test all available samples with Docker. That will permit you to test the API, to study it, and to show how to integrate it in your own project. There are 2 ways to run the samples via Docker and to study their integration in it: with the current project's Dockerfile or the official Docker images hosted in the Docker Hub web service.
 
 <a name="pull_image_from_dockerhub"></a>
-### Pull image from DockerHub
+### Pull image from Docker Hub
+
+A Docker image to running `weathermodule` samples is available on Docker Hub service, just [here](https://hub.docker.com/r/wicken/weathermodule).
+
+To running it and enjoy all samples of the API, please follow the instructions below:
 
 <a name="build_image_from_dockerfile"></a>
 ### Build image from the Dockerfile
