@@ -35,7 +35,7 @@ This repository is composed of one Go file named *weathermodule.go* which contai
 <a name="running_with_docker"></a>
 ## Running with Docker
 
-You can test all available samples with Docker. That will permit you to test the API, to study it, and to show how to integrate it in your own project. There are 2 ways to run the samples via Docker and to study their integration in it: with the current project's Dockerfile or the official Docker images hosted in the Docker Hub web service.
+You can test all available samples with Docker. That will permit you to test the Go package, to study it, and to show how to integrate it in your own project. There are 2 ways to run the samples via Docker and to study their integration in it: with the current project's Dockerfile or the official Docker images hosted in the Docker Hub web service.
 
 <a name="pull_image_from_dockerhub"></a>
 ### Pull image from Docker Hub
