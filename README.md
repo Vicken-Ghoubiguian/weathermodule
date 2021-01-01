@@ -41,10 +41,13 @@ You can test all available samples with Docker. That will permit you to test the
 ### Pull image from Docker Hub
 
 A Docker image to running `weathermodule` samples is available on Docker Hub service, just [here](https://hub.docker.com/r/wicken/weathermodule).
-To running it and enjoy all samples of the API, please follow the instructions below:
+To running it and finaly enjoy all samples of the API, please follow the instructions below:
 
 <a name="build_image_from_dockerfile"></a>
 ### Build image from the Dockerfile
+
+The users can also build their own Docker image to running `weathermodule` samples using the current `Dockerfile`.
+To building, running it and finaly enjoy all samples of the API, please follow the instructions below:
 
 <a name="a_few_usefull_links"></a>
 ## A few usefull links
