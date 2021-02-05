@@ -57,7 +57,23 @@ Now enjoy !
 ### Build image from the Dockerfile
 
 The users can also build their own Docker image to running `weathermodule` samples using the current `Dockerfile`.
-To building, running it and finaly enjoy all samples of the API, please follow the instructions below:
+To build, run it and finaly enjoy all samples of the API, please follow the instructions below:
+
+```bash
+# Cloning the the 'weathermodule' project from GitHub...
+git clone https://github.com/Vicken-Ghoubiguian/weathermodule
+
+# Placing in the 'weathermodule' GitHub project's folder...
+cd weathermodule
+
+# 
+
+
+# Running the 'weathermodule' Docker image as a Docker container to test all of the Go samples...
+docker container run -it weathermodule:latest
+```
+
+Now enjoy !
 
 <a name="a_few_usefull_links"></a>
 ## A few usefull links
