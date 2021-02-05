@@ -66,8 +66,8 @@ git clone https://github.com/Vicken-Ghoubiguian/weathermodule
 # Placing in the 'weathermodule' GitHub project's folder...
 cd weathermodule
 
-# 
-
+# Creating the weathermodule Docker image with the value of the user's OpenWeatherMap API key passed into the the parameter 'user_api_key'...
+docker build . -t weathermodule:latest --build-arg user_api_key="<wished_openWeatherMap_API_key>"
 
 # Running the 'weathermodule' Docker image as a Docker container to test all of the Go samples...
 docker container run -it weathermodule:latest
